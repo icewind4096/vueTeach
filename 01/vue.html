@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../common/vue.js">
+
+    </script>
+</head>
+<body>
+    <div id="root">
+        <h1>公司名称: {{name}}</h1>
+        <h1>地址: {{address}}</h1>
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false;           //阻止Vue在启动时生成生产提示
+
+        //创建VUE对象实例
+        new Vue({
+            el: '#root',                            //通过el表达式, 绑定vue对象实例为那个具体容器服务, 此处绑定到id=root的div元素
+            data:{
+                name: '灵动微电子',
+                address: '上海',
+            }
+        });
+    </script>
+</body>
+</html>
