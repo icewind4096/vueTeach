@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据绑定</title>
+    <script type="text/javascript" src="../common/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h1>
+            单向数据绑定: <input type="text" v-bind:value="msg">
+            <br/>
+            双向数据绑定: <input type="text" v-model:value="msg">
+        </h1>
+    </div>
+
+    <script type="text/javascript">
+        new Vue({
+            el:'#root',
+            data:{
+                msg: 'ibm'
+            }
+        })
+    </script>
+</body>
+
+</html>

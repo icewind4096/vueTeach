@@ -21,12 +21,21 @@
 ```
 4.设置需要显示的数据
 ```javascript
+    绑定方法1: 前期固定绑定
     new Vue({
         el: '#root',
         data:{
             name:'弗里德里克'
         }
     })
+
+    绑定方法2: 后期动态绑定
+    const app = new Vue({
+        data:{
+            name:'弗里德里克'
+        }
+    })
+    app.$mount('#root')
 ```
 >重点
 >>1.容器与Vue对象的关系是一一对应
@@ -43,3 +52,15 @@
 简写形式
     <a :标签名="值"></a>
 ```
+
+###第三课 数据绑定
+1.单向数据绑定,数据只可以由data流向页面,使用指令语法V-Bind
+```javascript
+    <a v-bind:标签名="值"></a>
+```
+2.双向数据绑定,数据不仅可以由data流向页面，还可以由页面流向data,使用指令语法V-Model
+```javascript
+    <input type="text" v-model:value="值"></input>
+```
+>重点
+>>双向数据绑定,只可以作用与表单类元素(输入类元素),只对应value属性
