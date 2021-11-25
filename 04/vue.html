@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EL与Data的两种写法</title>
+    <script type="text/javascript" src="../common/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h1>你好 {{name}}同学</h1>
+    </div>
+
+    <script type="text/javascript">
+        //绑定EL的两种写法
+            //写法1：
+            // new Vue({
+            //     el:'#root',
+            //     data:{
+            //         name: '张三'
+            //     }
+            // })
+
+            //写法2：
+            const app = new Vue({
+                data:{
+                    name: '张三'
+                }
+            })
+            app.$mount('#root');
+
+        //绑定Data的两种写法
+        // new Vue({
+        //     el:'#root',
+        //写法1：对象式
+        //     data:{
+        //         name: '张三'
+        //     }
+        //写法2：函数式,必须返回一个对象
+        //     data: function(){
+        //          return {
+        //              name: '张三'
+        //          }
+        //     }
+        // })
+    </script>
+</body>
+
+</html>

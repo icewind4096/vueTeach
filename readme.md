@@ -64,3 +64,24 @@
 ```
 >重点
 >>双向数据绑定,只可以作用与表单类元素(输入类元素),只对应value属性
+
+###第四课 EL和Data的两种绑定方法
+```javascript
+    绑定方法1: 前期固定绑定
+    new Vue({
+        el: '#root',                            
+        data:{                                     
+            name:'弗里德里克'                     
+        }                                       
+    })                                          
+                                                
+    绑定方法2: 后期动态绑定
+    const app = new Vue({
+        data: function(){
+            return {
+                     name: '张三'
+                 }
+        }
+    })
+    app.$mount('#root')
+```
