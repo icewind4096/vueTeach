@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MVVM模型 Model View Model-View</title>
+    <script type="text/javascript" src="../common/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h1>公司名称：{{company.name}}</h1>
+        <h1>公司地址：{{company.address}}</h1>
+    </div>
+
+    <script type="text/javascript">
+        const vm = new Vue({
+            data: function(){
+                return {
+                    company:{
+                        name: 'IBM',
+                        address: '美国',
+                    }
+                }
+            }
+        })
+        vm.$mount('#root');
+        console.log(vm);
+    </script>
+</body>
+
+</html>

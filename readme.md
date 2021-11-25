@@ -85,3 +85,10 @@
     })
     app.$mount('#root')
 ```
+
+###第五课 MVVM
+####MVVM模型
+#####1. M: Model (模型): data中的数据
+#####2. V: View (视图): 模板代码
+#####3. VM: View-Model (视图模型): vue实例
+
