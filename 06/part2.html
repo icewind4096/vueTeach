@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据代理</title>
+    <script type="text/javascript" src="../common/vue.js"></script>
+</head>
+<body>
+    <script type="text/javascript">
+        let object1 = {x: 100}
+        let object2 = {y: 100}
+
+        //数据属性描述符(DataDescriptor)和访问器属性描述(AccessorDescriptor)不可以同时出现
+        Object.defineProperty(object1, 'y', {
+            get:function (){                //访问器属性描述
+                // console.log('age的get方法被调用')
+                return object2.y;
+            },
+
+            set:function (value){           //访问器属性描述
+                // console.log('age的set方法被调用, 新值为' + value)
+                object2.y = value;
+            }
+        })
+
+        console.log(object1)
+
+        console.log(object2)
+    </script>
+</body>
+
+</html>

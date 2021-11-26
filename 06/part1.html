@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>回顾object.defineProperty</title>
+    <script type="text/javascript" src="../common/vue.js"></script>
+</head>
+<body>
+    <script type="text/javascript">
+        let number = 18;
+        let person = {
+            name: '张三',
+            sex: '男'
+        }
+
+        //数据属性描述符(DataDescriptor)和访问器属性描述(AccessorDescriptor)不可以同时出现
+        Object.defineProperty(person, 'age', {
+            //value: 18,                    //数据属性描述符
+            //writable: true,               //数据属性描述符
+                                            //控制属性是否可以被修改，如果为true则可以被修改，否则不可以，默认值为false
+
+            //enumerable: true,             //控制属性是否可以被枚举，如果为True则可以被遍历,否则不可以被枚举，默认值为false
+            //configurable: true,           //控制属性是否可以被删除，如果为true则可以被删除，否则不可以，默认值为false
+            get:function (){                //访问器属性描述
+                                            // 当有人读取age属性时，getter函数被触发，返回值为age的值
+                console.log('age的get方法被调用')
+                return number;
+            },
+
+            set:function (value){           //访问器属性描述
+                                            // 当有人设置age属性时，setter函数被触发，且会收到修改的具体值
+                console.log('age的set方法被调用, 新值为' + value)
+                number = value;
+            }
+        })
+
+        Object.defineProperty(person, 'birthday', {
+            value: '2017-10-1',
+            enumerable: false,               //控制属性是否可以被枚举，如果为True则可以被遍历,否则不可以被枚举，默认值为false
+            writable: false,                 //控制属性是否可以被修改，如果为true则可以被修改，否则不可以，默认值为false
+            configurable: false              //控制属性是否可以被删除，如果为true则可以被删除，否则不可以，默认值为false
+        })
+
+        console.log(Object.keys(person)) //此时你会发现，age属性可以被枚举被修改，而birthday属性不可以被枚举被修改
+
+        console.log(person)
+    </script>
+</body>
+
+</html>
