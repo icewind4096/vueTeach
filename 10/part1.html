@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<header>
+    <meta charset="utf-8">
+    <title>绑定样式</title>
+    <script type="text/javascript" src="../common/vue.js"></script>
+</header>
+
+<style>
+    .basic{
+        float: left;
+        width: 200px;
+        height: 200px;
+        border: 1px solid chartreuse;
+    }
+
+    .normal{
+        background-color: cornsilk;
+    }
+
+    .happy{
+        background-color: crimson;
+    }
+
+    .sad{
+        background-color: gray;
+    }
+
+    .italicstyle{
+        font-style:italic;
+    }
+
+    .fontsizestyle{
+        font-size:12px;
+    }
+    .fontfamilystyle{
+        font-family: 'Courier New', Courier, monospace;
+    }
+    .fontweightstyle{
+        font-weight: 900;
+    }
+</style>
+
+<body>
+    <div id='root'>
+        <!-- 绑定class样式,字符串写法, 适用于样式的类名不确定，需要动态指定 -->
+        <div class='basic' :class='mood' @click="changeMood">绑定class样式-字符串写法</div>
+        <!-- 绑定class样式,数组写法, 适用于样式的类名不确定，需要动态指定 -->
+        <div class='basic' :class='arrstyle'>绑定class样式-数组写法<br/>
+            <label>字体斜体样式</label><input type="checkbox" @click="selectitalic"/><br/>
+            <label>字体尺寸样式</label><input type="checkbox" @click="selectfontsize"/>
+        </div>
+        <!-- 绑定class样式,对象写法, 适用于样式个数确定，名字确定，只是动态决定需不需要应用样式 -->
+        <div class="basic" :class="objectStyle">绑定class样式-对象写法
+            <label>字体家族式样</label><input type="checkbox" @click="selectfamily"/><br/>
+            <label>字体Weight样式</label><input type="checkbox" @click="selectweight"/>
+        </div>
+
+        <!-- 绑定style样式,对象写法 -->
+        <div class="basic" :style="styleoject">绑定style样式-对象写法</div>
+
+        <!-- 绑定style样式,数组写法 -->
+        <div class="basic" :style="arraystyleoject">绑定style样式-对象写法</div>
+    </div>
+</body>
+
+<script>
+    const vm = new Vue({
+        el:'#root',
+        data(){
+            return {
+                name: 'ibm',
+                mood: 'normal',
+                arrstyle: [],
+                objectStyle: {
+                    fontfamilystyle: true,
+                    fontweightstyle: true,
+                },
+                styleoject:{
+                    fontSize: '20px',
+                    color: 'red',
+                },
+                arraystyleoject:[
+                    {
+                        fontSize: '40px',
+                    },
+                    {
+                        color: 'green',
+                    }
+                ]
+            }
+        },
+        methods: {
+            changeMood(){
+                if (this.mood == 'normal'){
+                    this.mood = 'happy'
+                } else {
+                    if (this.mood == 'happy'){
+                        this.mood = 'sad'
+                    } else {
+                        this.mood = 'normal'
+                    }
+                }
+                console.log('changemode')
+            },
+            selectitalic(event){
+                if (event.target.checked == true){
+                    this.arrstyle.push('italicstyle');
+                } else {
+                    for (let i = 0; i < this.arrstyle.length; i++) {
+                       if (this.arrstyle[i] == 'italicstyle'){
+                           this.arrstyle.splice(i, 1);
+                       }
+                    }
+                }
+                console.log('selectitalic')
+            },
+            selectfontsize(event){
+                if (event.target.checked == true){
+                    this.arrstyle.push('fontsizestyle');
+                } else {
+                    for (let i = 0; i < this.arrstyle.length; i++) {
+                       if (this.arrstyle[i] == 'fontsizestyle'){
+                           this.arrstyle.splice(i, 1);
+                       }
+                    }
+                }
+                console.log('selectfontsizestyle')
+            },
+            selectfamily(event){
+                this.objectStyle.fontfamilystyle = event.target.checked
+                console.log(this.objectStyle.fontfamilystyle)
+            },
+            selectweight(event){
+                this.objectStyle.fontweightstyle = event.target.checked
+                console.log(this.objectStyle.fontweightstyle)
+            },
+        },
+    })
+</script>
+
+</html>
