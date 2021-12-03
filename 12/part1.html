@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<header>
+    <meta charset="utf-8">
+    <title>列表渲染</title>
+    <script type="text/javascript" src="../common/vue.js"></script>
+</header>
+
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+
+    table{
+        width: 330px;
+        overflow: hidden;
+        margin: 40px auto;
+        border-collapse:collapse;
+    }
+
+    thead tr th{
+        border: 1px solid gray;
+        height: 20px;
+        line-height: 20px;
+        background-color: rgb(221, 216, 216);
+    }
+
+    tbody tr td{
+        border: 1px solid gray;
+        height: 20px;
+        line-height: 20px;
+    }
+
+    .ident{
+        text-align: center;
+        line-height: 20px;
+    }
+</style>
+
+<body>
+    <div id='root'>
+        <h1>遍历数组</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        序号
+                    </th>
+                    <th>
+                        姓名
+                    </th>
+                    <th>
+                        年龄
+                    </th>
+                </tr>
+            </thead>
+            <tbody v-for="(item, index) in persions" :key="item.id">
+                <tr class="ident">
+                    <td>
+                        {{index + 1}}
+                    </td>
+                    <td>
+                        {{item.name}}
+                    </td>
+                    <td>
+                        {{item.age}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h1>遍历对象</h1>
+        <ul v-for="(objectValue, objectKey) in carinfo" :key="objectKey">
+            <li>
+                {{objectKey}}-{{objectValue}}
+            </li>
+        </ul>
+
+        <h1>遍历字符串</h1>
+        <ul v-for="(char, index) in descript" :key="index">
+            <li>
+                {{index}}-{{char}}
+            </li>
+        </ul>
+
+        <h1>遍历指定次数</h1>
+        <ul v-for="(number, index) in 6" :key="index">
+            <li>
+                {{index}}-{{number}}
+            </li>
+        </ul>
+    </div>
+</body>
+
+<script>
+    const vm = new Vue({
+        el:'#root',
+        data(){
+            return {
+                persions:[
+                    {
+                        id: 1,
+                        name: '张三',
+                        age: 10,
+                    },
+                    {
+                        id: 2,
+                        name: '李四',
+                        age: 20,
+                    },
+                    {
+                        id: 3,
+                        name: '王五',
+                        age: 30,
+                    }
+                ],
+                carinfo:{
+                    name: '奥迪',
+                    size: '7米*4米',
+                    factory: '德国',
+                },
+                descript: 'iphone就是一个垃圾'
+            }
+        },
+        methods: {
+        },
+    })
+</script>
+
+</html>

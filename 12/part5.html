@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <header>
+        <meta charset="utf-8">
+    </header>
+
+    <script>
+        let data = {
+            name: 'wangj',
+            age: 12,
+        }
+
+        const obs = new Observer(data);
+        console.log(obs)
+
+        function Observer(obj){
+            const keys = Object.keys(obj)
+            keys.forEach((key) =>{
+                Object.defineProperty(this, key, {
+                    get(){
+                        return obj[key]
+                    },
+                    set(value){
+                        obj[key] = value
+                    }
+                })
+            })
+        }
+
+        const vm = {};
+        console.log('>>>>>', vm)
+
+        vm._data = data = obs;
+        console.log(vm)
+    </script>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<header>
+    <meta charset="utf-8">
+    <title>列表过滤</title>
+    <script type="text/javascript" src="../common/vue.js"></script>
+</header>
+
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+
+    table{
+        width: 330px;
+        overflow: hidden;
+        margin: 0px auto;
+        border-collapse:collapse;
+    }
+
+    thead tr th{
+        border: 1px solid gray;
+        height: 20px;
+        line-height: 20px;
+        background-color: rgb(221, 216, 216);
+    }
+
+    tbody tr td{
+        border: 1px solid gray;
+        height: 20px;
+        line-height: 20px;
+    }
+
+    .ident{
+        text-align: center;
+        line-height: 20px;
+    }
+</style>
+
+<body>
+    <div id='root'>
+        <div style="width: 100px; height: 32px; margin: 40px auto 0px;">
+            <!-- 使用input属性实现
+            <input type="text" v-model="keyword" @input="searchData" placeholder="请输入过滤条件"> -->
+
+            <!-- 使用计算/监视属性-->
+            <input type="text" v-model="keyword" placeholder="请输入过滤条件">
+        </div>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            序号
+                        </th>
+                        <th>
+                            姓名
+                        </th>
+                        <th>
+                            年龄
+                        </th>
+                    </tr>
+                </thead>
+                <tbody v-for="(item, index) in persions" :key="index">
+                    <tr class="ident">
+                        <td>
+                            {{index + 1}}
+                        </td>
+                        <td>
+                            {{item.name}}
+                        </td>
+                        <td>
+                            {{item.age}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+<script>
+    const vm = new Vue({
+        el:'#root',
+        data(){
+            return {
+                keyword: '',
+                persions:[],
+                persionraw:[
+                    {
+                        id: 1,
+                        name: '马冬梅',
+                        age: 10,
+                    },
+                    {
+                        id: 2,
+                        name: '周冬雨',
+                        age: 20,
+                    },
+                    {
+                        id: 3,
+                        name: '温兆伦',
+                        age: 30,
+                    },
+                    {
+                        id: 4,
+                        name: '周杰伦',
+                        age: 40,
+                    }
+                ],
+            }
+        },
+        methods: {
+            reFillPersionsByName(keyword) {
+                //没技巧的写法
+                // swapPersions = []
+                // for (let i = 0; i < this.persionraw.length; i ++){
+                //     if (this.persionraw[i].name.indexOf(keyword) > -1){
+                //         swapPersions.push(this.persionraw[i]);
+                //     }
+                // }
+                // return swapPersions
+
+                //过滤写法
+                return this.persionraw.filter((item)=>{
+                    return item.name.indexOf(keyword) > -1;
+                })
+            },
+            searchData(){
+                this.reFillPersionsByName(event.target.value);
+            }
+        },
+        watch:{
+            'keyword':{
+                immediate: true,
+                handler(newValue, oldValue){
+                    this.persions = this.reFillPersionsByName(newValue);
+                }
+            }
+        },
+        computed:{
+            // persions: {
+            //         get(){
+            //             return this.reFillPersionsByName(this.keyword)
+            //         }
+            // }
+        },
+    })
+</script>
+
+</html>
