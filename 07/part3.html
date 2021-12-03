@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>键盘事件</title>
+    <script type="text/javascript" src="../common/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <input type="text" placeholder="按下回车提示输入" @keydown.enter="showInfoKeyDown">
+
+        <!-- tab键由切换焦点的属性，所以如果使用tab键，必须在keydown事件中绑定使用, 否则由于tab键由于焦点切换，导致keyup事件无法触发 -->
+        <input type="text" placeholder="按下tab键提示输入" @keydown.tab="showInfoKeyDown">
+        <input type="text" placeholder="抬起tab键提示输入" @keyup.tab="showInfoKeyUp">
+
+        <!-- 使用keyCode去指定具体的按键 -->
+        <input type="text" placeholder="使用keyCode去指定具体的按键,提示输入" @keyup.32="showInfoKeyUp">
+
+        <!-- Vue.config.keyCodes.自定义键名 = 键码 定制按键别名 -->
+        <input type="text" placeholder="使用keyCode去指定具体的按键,提示输入" @keyup.kongge="showInfoKeyUp">
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.keyCodes.kongge = 32
+        const vm = new Vue({
+            data: function(){
+                return {
+                    company:{
+                        name: 'IBM',
+                        address: '美国',
+                    }
+                }
+            },
+            methods: {
+                showInfoKeyUp(event){
+                    console.log(event)
+                    console.log(event.target.value)
+                },
+                showInfoKeyDown(event){
+                    console.log(event.target.value)
+                }
+            }
+        })
+        vm.$mount('#root');
+        console.log(vm);
+    </script>
+</body>
+
+</html>

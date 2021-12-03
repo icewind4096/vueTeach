@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件处理修饰符</title>
+    <script type="text/javascript" src="../common/vue.js"></script>
+    <style>
+        .stop{
+            background-color: aquamarine;
+            height: 24px;
+        }
+        .capture1{
+            width: 100%;
+            background-color: blueviolet;
+        }
+        .capture2{
+            background-color: coral;
+        }
+        .self1{
+            background-color: brown;
+        }
+        .self2{
+            background-color: chartreuse;
+        }
+        div ul{
+            height: 80px;
+            width: 100px;
+            overflow: auto;
+        }
+        div ul li{
+            height: 40px;
+            background-color: darkcyan;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <!-- 阻止默认事件(常用)-->
+        <a href="http://www.baidu.com" @click.prevent="showInfo">点击我弹出对话框,但是不跳转页面</a>
+
+        <!-- 阻止冒泡事件(常用)-->
+        <div class="stop" @click="stopDemo">
+            <button @click="stopDemo">不阻止冒泡演示-button弹窗</button>
+            <button @click.stop="stopDemo">阻止冒泡演示-button弹窗</button>
+            <a href="http://www.baidu.com" @click.prevent.stop="showInfo">点击我弹出对话框,而且阻止默认A标签的页面跳转</a>
+        </div>
+
+        <!-- 只触发一次事件(常用)-->
+        <button @click.once="onceDemo">只触发一次弹窗</button>
+
+        <!-- 捕获模式(常用)-->
+        <div class="capture1" @click.capture="captureDemo('外层DIV触发')">
+            捕获模式下演示-外层首先触发
+            <div class="capture2" @click="captureDemo('内层DIV触发')">捕获模式下演示-内层依次触发
+            </div>
+        </div>
+
+        <!-- 只触发是自己的事件(常用), 和prevent的效果差不多，可以精细化指定事件的执行者-->
+        <div class="self1" @click.self="captureDemo('只接受点击事件是自身')">
+            self修饰符 外层DIV触发，不受内层冒泡
+            <div class="self2" @click="captureDemo('内层DIV触发')">捕获模式下演示-内层依次触发
+            </div>
+        </div>
+
+        <!-- passive异步事件,在做大量耗时的运算时，可以考虑使用-->
+        <div>
+            <ul @wheel.passive="wheelDemo">
+                <li>A</li>
+                <li>B</li>
+                <li>C</li>
+                <li>D</li>
+                <li>E</li>
+            </ul>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        const vm = new Vue({
+            data: function(){
+                return {
+                    company:{
+                        name: 'IBM',
+                        address: '美国',
+                    }
+                }
+            },
+            methods: {
+                showInfo(event){
+                    event.preventDefault()
+                    console.log(event)
+                    alert('你点击我了')
+                },
+                stopDemo(event){
+                    console.log(event)
+                    alert('冒泡演示')
+                },
+                onceDemo(event){
+                    console.log(event)
+                    alert('只触发一次弹窗')
+                },
+                captureDemo(value){
+                    alert(value)
+                },
+                wheelDemo(event){
+                    console.log('开始滚动...')
+                    for (let i = 0; i < 1000000; i ++){
+                        console.log('#')
+                    }
+                    console.log('滚动结束')
+                }
+            }
+        })
+        vm.$mount('#root');
+        console.log(vm);
+    </script>
+</body>
+
+</html>
