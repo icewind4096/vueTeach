@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <header>
+        <meta charset="utf-8">
+    </header>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .lbt{
+            border: 1px solid black;
+            width: 650px;
+            height: 360px;
+            margin: 40px auto;
+            background-color: blueviolet;
+            position: relative;
+        }
+        .btn{
+            position: absolute;
+            top: 50%;
+            margin-top: -20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            line-height: 40px;
+            text-align: center;
+            text-decoration: none;
+            background-color: rgba(255, 255, 255, 50%);
+            cursor: point;
+            font-family: consolas;
+            font-size: 26px;
+        }
+        .lbt .btn:hover{
+            background-color: gold;
+            color: white;
+        }
+        .leftbtn{
+            left: 10px;
+        }
+        .rightbtn{
+            right: 10px;
+        }
+        ul{
+            position: absolute;
+            bottom: 10px;
+            right: 0px;
+            width: 160px;
+            height: 20px;
+        }
+        li{
+            float: left;
+            width: 20px;
+            height: 20px;
+            background-color: gold;
+            border-radius: 50%;
+            margin-right: 20px;
+            list-style: none;
+        }
+        .activate{
+            background-color: greenyellow;
+        }
+    </style>
+
+    <body>
+        <div class="lbt">
+            <a href="#" class="btn leftbtn">&lt;</a>
+            <a href="#" class="btn rightbtn">&gt;</a>
+            <ul>
+                <li></li>
+                <li class="activate"></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </body>
+</html>
