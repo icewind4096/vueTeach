@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<header>
+    <meta charset="utf-8">
+    <title>绑定样式</title>
+    <script type="text/javascript" src="../common/vue.js"></script>
+</header>
+
+<style>
+</style>
+
+<body>
+    <div id='root'>
+        <div v-if="div1show">div1</div>
+        <div v-if="div2show">div2</div>
+        <div v-if="div3show">div3</div>
+        <div>
+            <button @click="tigger1">{{div1showtitle}}</button>
+            <button @click="tigger2">{{div2showtitle}}</button>
+            <button @click="tigger3">{{div3showtitle}}</button>
+        </div>
+    </div>
+</body>
+
+<script>
+    const vm = new Vue({
+        el:'#root',
+        data(){
+            return {
+                div1show: true,
+                div1showtitle: '隐藏',
+                div2show: true,
+                div2showtitle: '隐藏',
+                div3show: true,
+                div3showtitle: '隐藏',
+            }
+        },
+        methods: {
+            tigger1(){
+                this.div1show = !this.div1show;
+                this.div1showtitle = this.div1show ? '隐藏' : '显示'
+            },
+            tigger2(){
+                this.div2show = !this.div2show;
+                this.div2showtitle = this.div2show ? '隐藏' : '显示'
+            },
+            tigger3(){
+                this.div3show = !this.div3show;
+                this.div3showtitle = this.div3show ? '隐藏' : '显示'
+            }
+        },
+    })
+</script>
+
+</html>
