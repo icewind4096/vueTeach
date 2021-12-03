@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>姓名-methods语法实现</title>
+    <script type="text/javascript" src="../common/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <label for="firstName">姓</label><input type="text" id="firstName" v-model="firstName">
+        <br/>
+        <label for="lastName">名</label><input type="text" id="lastName" v-model="lastName">
+        <br/>
+        <label>{{fullName()}}</label>
+    </div>
+
+    <script type="text/javascript">
+        const vm = new Vue({
+            data: function(){
+                return {
+                    firstName: '张',
+                    lastName: '三',
+                }
+            },
+            methods:{
+                fullName: function() {
+                    return this.firstName + '-' + this.lastName
+                }
+            }
+        })
+        vm.$mount('#root');
+        console.log(vm);
+    </script>
+</body>
+
+</html>

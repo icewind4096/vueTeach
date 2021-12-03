@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>姓名-计算属性实现</title>
+    <script type="text/javascript" src="../common/vue.js"></script>
+</head>
+
+<body>
+    <div id='root'>
+        <label for="firstname">姓</label><input type="text" id="firstname" v-model="firstName">
+        <br/>
+        <label for="lastname">名</label><input type="text" id="lastname" v-model="lastName">
+        <br/>
+        <label for="fullname">全名</label><input type="text" id="fullname" v-model="fullName">
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el:'#root',
+            data() {
+                return {
+                    firstName: "张三",
+                    lastName: "李四"
+                }
+            },
+            computed:{
+                fullName: {
+                    get(){
+                        return this.firstName + '-' + this.lastName;
+                    },
+                    set(value){
+                        const arr = value.split('-');
+                        this.firstName = '';
+                        this.lastName = '';
+                        if (arr.length > 0){
+                            this.firstName = arr[0]
+                            console.log(arr.length)
+                            if (arr.length >= 2){
+                                this.lastName = arr[1]
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
