@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<header>
+    <meta charset="utf-8">
+    <title>监视属性实现</title>
+    <script type="text/javascript" src="../common/vue.js"></script>
+</header>
+
+<body>
+    <div id="root">
+        <h2>今天天气很{{weather}}</h2>
+        <button @click="tigger">切换天气</button>
+        <button @click="test.a=test.a+1">切换天气</button>
+    </div>
+</body>
+
+<script>
+    const vm = new Vue({
+        data() {
+            return {
+                isHot: true,
+                test:{
+                    a: 1,
+                    b: 2,
+                }
+            }
+        },
+        computed: {
+            weather: {
+                get(){
+                    return this.isHot == true ? '炎热' : '凉爽';
+                }
+            }
+        },
+        methods: {
+            tigger: function() {
+                this.isHot = ~this.isHot;
+            }
+        },
+        watch:{
+            weather:{
+                immediate: true,
+                handler(newValue, oldValue){
+                    console.log(oldValue, newValue)
+                }
+            },
+            test:{
+                deep: true,
+                handler(newValue, oldValue){
+                    console.log(oldValue.a, oldValue.b, newValue.a, newValue.b)
+                }
+            }
+        }
+    });
+    vm.$mount('#root');
+    vm.$watch('isHot', {
+                immediate: true,
+                handler(newValue, oldValue){
+                    console.log(oldValue, newValue)
+                }
+            })
+</script>
+
+</html>
