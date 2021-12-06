@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+    <header>
+        <meta charset="utf-8">
+    </header>
+    
+    <script type="text/javascript" src="./common/vue.js"></script>
+
+    <link rel="stylesheet" href="./common/iconfont.css">
+
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .chipname{
+            position:absolute;
+            left: 80px; 
+            top: 238px;
+            text-decoration-line: underline;
+            font-family:Arial, Helvetica, sans-serif; 
+            font-size: 32px;
+        }
+
+        .companyname{
+            position: absolute; 
+            left: 80px; 
+            top: 270px;
+            font-family:Arial, Helvetica, sans-serif; 
+            font-size: 32px;
+            background: linear-gradient(215deg,blue, gold);
+            -webkit-text-fill-color:transparent;
+            -webkit-background-clip: text;            
+        }
+
+        .chipbody{
+            position: relative;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 12px;
+            background-color: gray;
+            margin: 200px auto;
+            border: 1px solid black;
+            height: 518px;
+            width: 518px;                  
+            background: linear-gradient(to bottom right, black, grey, #909090 , #303030);
+            /* background: linear-gradient(150deg,white, black); */
+            /* transform: scale(1.5);              */
+            /* transform:rotate(45deg); */
+        }
+
+        .pinrectV{
+            position: absolute;
+            height: 468px;                              /*body.height - margin-top * 2 = 518 - 25 * 2 = 468*/
+            width: 80px;                                /*一个单元80px*/
+            /* background-color:red; */
+        }
+
+        .pinrectH{
+            position: absolute;
+            height: 80px;                                /*一个单元80px*/
+            width: 488px;                                /*body.height - 30px = 518 - 30 = 488*/
+            /* background-color:green; */
+        }
+
+        .pingpiopa{
+            border: 1px solid black;
+            color: black;
+            background-color:rgba(216, 92, 87, 0.4); 
+        }
+
+        .pingpiopb{
+            border: 1px solid black;
+            color: black;
+            background-color:rgba(84, 56, 245, 0.4); 
+        }
+
+        .pingpiopc{
+            border: 1px solid black;
+            color: black;
+            background-color:rgba(100, 17, 107, 0.4); 
+        }
+
+        .pingpiopd{
+            border: 1px solid black;
+            color: black;
+            background-color:rgba(217, 243, 158, 0.4); 
+        }
+
+        .pingpiope{
+            border: 1px solid black;
+            color: black;
+            background-color:rgba(235, 41, 50, 0.4); 
+        }
+
+        .pingpiopf{
+            border: 1px solid black;
+            color: black;
+            background-color:rgba(240, 83, 21, 0.4); 
+        }
+
+        .pingpiopg{
+            border: 1px solid black;
+            color: black;
+            background-color:rgba(139, 163, 155, 0.4); 
+        }
+
+        .pingpioph{
+            border: 1px solid black;
+            color: black;
+            background-color:rgba(207, 21, 161, 0.4); 
+        }
+
+        .pintypevdd{
+            border: 1px solid black;
+            color: white;
+            background-color: red; 
+        }
+
+        .pintypevss{
+            border: 1px solid black;
+            color: white;
+            background-color: black; 
+        }
+
+        .pintypevdda{
+            border: 1px solid black;
+            color: white;
+            background-color: rgba(255, 0, 0, 0.5)
+        }
+
+        .pintypevssa{
+            border: 1px solid black;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5)
+        }
+
+        .pintypenrst{
+            border: 1px solid black;
+            color: white;
+            background-color:rgba(128, 128, 128, 0.5)
+        }
+
+        .pintypeboot{
+            border: 1px solid black;
+            color: white;
+            background-color: blue;
+        }
+
+        .pintypeunvisiable{
+            visibility:hidden;
+        }
+
+        .chiptoppinnumrect{
+            top: 0px;
+            margin-left: 31px;                          /*chipbody.height - .pinrectV.height = 518px - 468px = 50px, 50px / 2 = 25px*/
+            height: 15px;
+        }
+
+        .pintopnum{
+            float: left;
+            width: 15px;    
+            text-align: right;
+            writing-mode:sideways-lr;
+            margin-right: 15px;
+            color: white;
+        }
+
+        .chiptoppinnamerect{
+            left: 0px;                                 
+            top: -80px;
+            margin-left: 29px;                          /*chipbody.height - .pinrectV.height = 518px - 468px = 50px, 50px / 2 = 25px*/
+            /* background-color: blueviolet; */
+        }
+
+        .pintopname{
+            float: left;
+            width: 15px;    
+            height: 78px;
+            text-align: left;
+            line-height: 15px;
+            writing-mode:sideways-lr;
+            margin-right: 13px;
+        }
+
+        .pintopname:hover{
+            box-shadow: 3px -2px #909090;
+            color: white;
+            background-color: rgba(32, 64, 128, 0.5);
+        }
+
+        .chiptoppinafrect{
+            left: 0px; 
+            top: -188px;                                 /*自身高度80px + 偏移第一个name高度80px + 间隔 28px = 189*/           
+            margin-left: 29px;
+            /* background-color:rebeccapurple; */
+        }
+
+        .pintopafname{
+            float: left;
+            width: 15px;    
+            height: 78px;
+            color: white;
+            text-align: left;
+            line-height: 15px;
+            writing-mode:sideways-lr;
+            margin-right: 13px;
+            border: 1px solid black;
+            background-color:indianred;
+        }
+
+        .pintopafname:hover{
+            box-shadow: 3px -2px #909090;
+            color: black;
+            background-color: rgba(64, 128, 255, 0.5);
+        }
+
+        .chipbottompinnumrect{
+            top: 503px;
+            height: 15px;
+            margin-left: 30px;                          /*chipbody.height - .pinrectV.height = 518px - 468px = 50px, 50px / 2 = 25px*/
+        }
+
+        .pinbottomnum{
+            float: left;
+            width: 15px;    
+            height: 78px;
+            text-align: right;
+            writing-mode:sideways-lr;
+            margin-right: 15px;
+            color: white;
+        }
+
+        .chipbottompinnamerect{
+            left: 0px;                                 
+            top: 518px;
+            margin-left: 29px;                          /*chipbody.height - .pinrectV.height = 518px - 468px = 50px, 50px / 2 = 25px*/
+        }
+
+        .pinbottomname{
+            float: left;
+            width: 15px;    
+            height: 78px;
+            text-align: right;
+            writing-mode:sideways-lr;
+            margin-right: 13px;
+        }
+
+        .pinbottomname:hover{
+            box-shadow: 3px 2px #909090;
+            color: white;
+            background-color: rgba(32, 64, 128, 0.5);
+        }
+
+        .chipbottompinafrect{
+            left: -1px; 
+            top: 626px;                                     
+            margin-left: 29px;
+            /* background-color:rebeccapurple; */
+        }
+
+        .pinbottomafname{
+            float: left;
+            width: 15px;    
+            height: 78px;
+            color: white;
+            text-align: right;
+            writing-mode:sideways-lr;
+            margin-right: 13px;
+            border: 1px solid black;
+            background-color:indianred;
+        }
+
+        .pinbottomafname:hover{
+            box-shadow: 3px 2px #909090;
+            color: black;
+            background-color: rgba(64, 128, 255, 0.5);
+        }
+
+        .chiprightpinnumrect{
+            left: 500px;                                    
+            top: -1px;
+            width: 18px;
+            margin-top: 25px;
+        }
+
+        .pinrighnum{
+            width: 16px;    
+            height: 15px;
+            line-height: 15px;
+            text-align: right;
+            margin-bottom: 13px;
+            border: 1px solid rgb(0, 0, 0, 0);
+            color: white;
+        }
+
+        .chiprightpinnamerect{
+            left: 518px;                               /*(chipbody.width)*/
+            top: -1px;
+            margin-top: 25px;                           /*chipbody.height - .pinrectV.height = 518px - 468px = 50px, 50px / 2 = 25px*/
+            /* background-color: indianred; */
+        }
+
+        .pinrightname{
+            width: 78px;    
+            height: 15px;
+            line-height: 15px;
+            text-align: left;
+            margin-bottom: 13px;
+        }
+
+        .pinrightname:hover{
+            box-shadow: 2px 3px #909090;
+            color: white;
+            background-color: rgba(32, 64, 128, 0.5);
+        }
+
+        .chiprightpinafrect{
+            left: 627px;                               /*-(chipbody.body + pinrightname.width + 1px + 间距) 间距=30px */
+            top: -1px;
+            margin-top: 25px;                          /*chipbody.height - .pinrectV.height = 488px - 438px = 50px, 50px / 2 = 25px*/
+            /* background-color:gold; */
+        }
+
+        .pinrightafname{
+            width: 78px;    
+            height: 15px;
+            line-height: 15px;
+            text-align: left;
+            margin-bottom: 13px;
+            border: 1px solid black;
+            color: white;
+            background-color:indianred;
+        }
+
+        .pinrightafname:hover{
+            box-shadow: 2px 3px #909090;
+            color: black;
+            background-color: rgba(64, 128, 255, 0.5);
+        }
+
+        .chipleftpinnumrect{
+            margin-top: 24px;
+        }
+
+        .pinleftnum{
+            width: 16px;    
+            height: 15px;
+            line-height: 15px;
+            text-align: right;
+            margin-bottom: 13px;
+            border: 1px solid rgb(0, 0, 0, 0);
+            color: white;
+        }
+
+        .chipleftpinnamerect{
+            left: -80px;                               /*-(pinrectV.width + 2)*/
+            top: -1px;
+            margin-top: 25px;                           /*chipbody.height - .pinrectV.height = 488px - 438px = 50px, 50px / 2 = 25px*/
+        }
+
+        .pininfo{
+            list-style: none;
+            /* background-color: sandybrown; */
+        }
+
+        .pinleftname{
+            width: 78px;    
+            height: 15px;
+            line-height: 15px;
+            text-align: right;
+            margin-bottom: 13px;
+        }
+
+        .pinleftname:hover{
+            box-shadow: 1px 3px #909090;
+            color: white;
+            background-color: rgba(32, 64, 128, 0.5);
+        }
+
+        .chipleftpinafrect{
+            left: -190px;                               /*-(chipleftpinnamerect.left + chipleftpinnamerect.width + 间距) 间距=30px */
+            top: -1px;
+            width: 80px;
+            margin-top: 25px;                           /*chipbody.height - .pinrectV.height = 488px - 438px = 50px, 50px / 2 = 25px*/
+            /* background-color:gold; */
+        }
+
+        .pinleftafname{
+            width: 78px;    
+            height: 15px;
+            line-height: 15px;
+            text-align: right;
+            margin-bottom: 13px;
+            border: 1px solid black;
+            color: white;
+            background-color:indianred;
+        }
+
+        .pinleftafname:hover{
+            box-shadow: 2px 3px #909090;
+            color: black;
+            background-color: rgba(64, 128, 255, 0.5);
+        }
+
+        span:hover{
+            color: brown;
+            font-weight: 900;
+        }
+    </style>
+
+    <body>
+        <div id="root">
+            <!-- 旋转 -->
+            <div style="position: fixed; top:50px; right:50px;">
+                <span class="iconfont icon-xiangzuoxuanzhuan" style="font-weight: 400; font-size:32px;" @click="rotateleft(90)"></span>
+                <span class="iconfont icon-xiangyouxuanzhuan" style="font-weight: 400; font-size:32px;" @click="rotateright(90)"></span>
+            </div>
+            <!--  主体 -->
+            <div class="chipbody" :style="chiplookstyle">
+                <!-- logo -->
+                <div class="chipname">
+                    MM32F0131C7P&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+                <div class="companyname">
+                    MindMotion
+                </div>
+                <!-- 左边pin脚 -->
+                <div class="pinrectV chipleftpinnumrect">
+                    <ul class="pininfo"> 
+                        <li class="pinleftnum" v-for="(item,index) in leftpins" :key="index">{{item.id}}</li>
+                    </ul>
+                </div>
+                <div class="pinrectV chipleftpinnamerect">
+                    <ul class="pininfo"> 
+                        <li class="pinleftname" :class="pintypeclass4name(item)" v-for="(item,index) in leftpins" :key="index">{{item.name}}&nbsp;</li>
+                    </ul>
+                </div>
+                <div class="pinrectV chipleftpinafrect">
+                    <ul class="pininfo"> 
+                        <li class="pinleftafname" :class="pintypeclass4af(item)" v-for="(item,index) in leftpins" :key="index">{{item.AFs === undefined ? '' : item.AFs[0].name}}</li>
+                    </ul>
+                </div>
+                <!-- 底部pin脚 -->
+                <div class="pinrectH chipbottompinnumrect">
+                    <ul class="pininfo"> 
+                        <li class="pinbottomnum" v-for="(item,index) in bottompins" :key="index">{{item.id}}</li>
+                    </ul>
+                </div>
+                <div class="pinrectH chipbottompinnamerect">
+                    <ul class="pininfo"> 
+                        <li class="pinbottomname" :class="pintypeclass4name(item)" v-for="(item,index) in bottompins" :key="index">{{item.name}}&nbsp;</li>
+                    </ul>
+                </div>
+                <div class="pinrectH chipbottompinafrect">
+                    <ul class="pininfo"> 
+                        <li class="pinbottomafname" :class="pintypeclass4af(item)" v-for="(item,index) in bottompins" :key="index">{{item.AFs === undefined ? '' : item.AFs[0].name}}</li>
+                    </ul>
+                </div>
+                <!-- 右边pin脚 -->
+                <div class="pinrectV chiprightpinnumrect">
+                    <ul class="pininfo"> 
+                        <li class="pinrighnum" v-for="(item,index) in rightpins" :key="index">{{item.id}}</li>
+                    </ul>
+                </div>
+                <div class="pinrectV chiprightpinnamerect">
+                    <ul class="pininfo"> 
+                        <li class="pinrightname" :class="pintypeclass4name(item)" v-for="(item,index) in rightpins" :key="index">&nbsp;{{item.name}}</li>
+                    </ul>
+                </div>
+                <div class="pinrectV chiprightpinafrect">
+                    <ul class="pininfo"> 
+                        <li class="pinrightafname" :class="pintypeclass4af(item)" v-for="(item,index) in rightpins" :key="index">{{item.AFs === undefined ? '' : &nbsp;item.AFs[0].name}}</li>
+                    </ul>
+                </div>
+                <!-- 上部pin脚 -->
+                <div class="pinrectH chiptoppinnumrect">
+                    <ul class="pininfo"> 
+                        <li class="pintopnum" v-for="(item,index) in toppins" :key="index">{{item.id}}</li>
+                    </ul>
+                </div>
+                <div class="pinrectH chiptoppinnamerect">
+                    <ul class="pininfo"> 
+                        <li class="pintopname" :class="pintypeclass4name(item)" v-for="(item,index) in toppins" :key="index">&nbsp;{{item.name}}</li>
+                    </ul>
+                </div>
+                <div class="pinrectH chiptoppinafrect">
+                    <ul class="pininfo"> 
+                        <li class="pintopafname" :class="pintypeclass4af(item)" v-for="(item,index) in toppins" :key="index">{{item.AFs === undefined ? '' : item.AFs[0].name}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <script type="text/javascript">
+        const vm = new Vue({
+            el: "#root",
+            data:{
+                rotateedge: 0,
+                chiplookstyle:{
+                    transform: '',
+                },
+                //type: 1-gpio 2-vdd 3-vss 4-vdda 5-vdds 6-nRst, 7-boot
+                class4pinnametype: ['', 'pintypegpio','pintypevdd','pintypevss','pintypevdda','pintypevssa','pintypenrst', 'pintypeboot'],
+                class4pinnamegpio: ['pintgpiopa', 'pintgpiopb', 'pintgpiopc', 'pintgpiopd', 'pintgpiope', 'pintgpiopg', 'pintgpiopg', 'pintgpioph'],
+                class4pinaftype: ['', 'pintypeunvisiable'],
+                pins:[
+                    {id: 1,  name:'PD7', type: 1, AFs:[{idx: 5, name:"TIM3_CH1"},{idx: 6, name:"TIM17_CH1"}]}
+                   ,{id: 2,  name:'PC13',type: 1, AFs:[{idx: 6, name:"TIM2_CHR"}]}
+                   ,{id: 3,  name:'PC14',type: 1, AFs:[{idx: 6, name:"TIM2_CH2"}]}
+                   ,{id: 4,  name:'PC15',type: 1, AFs:[{idx: 6, name:"TIM2_CH3"}]}
+                   ,{id: 5,  name:'PD0', type: 1, AFs:[{idx: 1, name:"I2C1_SDA"},{idx: 2, name:"TIM1_CH1N"},{idx: 3, name:"UART1_TX"},{idx: 4, name:"TIM1_CH2"},{idx: 5, name:"SPI1_MOSI"}]}
+                   ,{id: 6,  name:'PD1', type: 1, AFs:[{idx: 1, name:"TIM1_BKIN"},{idx: 2, name:"I2C1_SCL"},{idx: 3, name:"TIM1_CH1"},{idx: 4, name:"UART1_RX"},{idx: 5, name:"TIM1_CH2"},{idx: 6, name:"SPI1_MISO"},{idx: 5, name:"SPI1_SCK"}]}
+                   ,{id: 7,  name:'nRST',type: 6}
+                   ,{id: 8,  name:'PC0', type: 1}
+                   ,{id: 9,  name:'PC1', type: 1}
+                   ,{id: 10, name:'PC2', type: 1, AFs:[{idx: 1, name:"SPI2_MISO"}]}
+                   ,{id: 11, name:'PC3', type: 1, AFs:[{idx: 1, name:"SPI2_MOSI"}]}
+                   ,{id: 12, name:'VSSA',type: 4}
+                   ,{id: 13, name:'VDDA',type: 5}
+                   ,{id: 14, name:'PA0', type: 1, AFs:[{idx: 1, name:"UART2_CTS"},{idx: 2, name:"TIM2_CH1"},{idx: 4, name:"UART1_RX"},{idx: 6, name:"TIM14_CH1"},{idx: 7, name:"COMP1_OUT"}]}
+                   ,{id: 15, name:'PA1', type: 1, AFs:[{idx: 1, name:"UART2_RTS"},{idx: 2, name:"TIM2_CH2"},{idx: 3, name:"TIM1_CH2"},{idx: 4, name:"UART1_TX"}]}
+                   ,{id: 16, name:'PA2', type: 1, AFs:[{idx: 1, name:"UART2_TX"},{idx: 2, name:"TIM2_CH3"},{idx: 3, name:"TIM1_CH2N"},{idx: 7, name:"COMP2_OUT"}]}
+                   ,{id: 17, name:'PA3', type: 1, AFs:[{idx: 1, name:"UART2_RX"},{idx: 2, name:"TIM2_CH4"},{idx: 3, name:"TIM1_CH3"}]}
+                   ,{id: 18, name:'PD4', type: 1, AFs:[{idx: 0, name:"SPI1_MISO"},{idx: 1, name:"SPI2_MOSI"}]}
+                   ,{id: 19, name:'PD5', type: 1, AFs:[{idx: 0, name:"SPI1_MOSI"},{idx: 1, name:"SPI2_MISO"}]}
+                   ,{id: 20, name:'PA4', type: 1, AFs:[{idx: 0, name:"SPI1_NSS"},{idx: 1, name:"SPI1_SCK"},{idx: 3, name:"TIM1_CH3N"},{idx: 4, name:"TIM14_CH1"},{idx: 5, name:"TIM1_BNIN"}]}
+                   ,{id: 21, name:'PA5', type: 1, AFs:[{idx: 0, name:"SPI1_SCK"},{idx: 1, name:"SPI1_NSS"},{idx: 2, name:"TIM2_CH1"},{idx: 6, name:"TIM3_CH3N"}]}
+                   ,{id: 22, name:'PA6', type: 1, AFs:[{idx: 0, name:"SPI1_MISO"},{idx: 1, name:"TIM3_CH1"},{idx: 2, name:"TIM1_BKIN"},{idx: 5, name:"TIM16_CH1"},{idx: 6, name:"TIM1_CH3"},{idx: 7, name:"COMP1_OUT"}]}
+                   ,{id: 23, name:'PA7', type: 1, AFs:[{idx: 0, name:"SPI1_MOSI"},{idx: 1, name:"TIM3_CH2"},{idx: 2, name:"TIM1_CH1N"},{idx: 3, name:"TIM1_CH3N"},{idx: 4, name:"TIM14_CH1"},{idx: 5, name:"TIM17_CH1"},{idx: 6, name:"TIM1_CH2N"},{idx: 7, name:"COMP2_OUT"}]}
+                   ,{id: 24, name:'PC4', type: 1, AFs:[{idx: 3, name:"UART2_TX"},{idx: 5, name:"TIM3_CH1"},{idx: 6, name:"SPI1_MOSI"}]}
+                   ,{id: 25, name:'PC5', type: 1, AFs:[{idx: 3, name:"UART2_RX"},{idx: 5, name:"TIM3_CH2"},{idx: 6, name:"SPI1_MISO"}]}
+                   ,{id: 26, name:'PB0', type: 1, AFs:[{idx: 1, name:"TIM3_CH3"},{idx: 2, name:"TIM1_CH2N"},{idx: 3, name:"TIM1_CH1N"},,{idx: 4, name:"TIM1_CH3"}]}
+                   ,{id: 27, name:'PB1', type: 1, AFs:[{idx: 0, name:"TIM14_CH1"},{idx: 1, name:"TIM3_CH4"},{idx: 2, name:"TIM1_CH3N"},{idx: 3, name:"TIM1_CH2N"},{idx: 4, name:"TIM2_CH3"},{idx: 5, name:"TIM1_CH2"},{idx: 6, name:"TIM1_CH1N"}]}
+                   ,{id: 28, name:'PB2', type: 1}
+                   ,{id: 29, name:'PB10',type: 1, AFs:[{idx: 1, name:"I2C1_SCL"},{idx: 2, name:"TIM2_CH3"},{idx: 5, name:"SPI2_SCK"}]}
+                   ,{id: 30, name:'PB11',type: 1, AFs:[{idx: 1, name:"I2C1_SDA"},{idx: 2, name:"TIM2_CH4"}]}
+                   ,{id: 31, name:'VSS', type: 3}
+                   ,{id: 32, name:'VDD', type: 2}
+                   ,{id: 33, name:'PB12',type: 1, AFs:[{idx: 0, name:"SPI2_NSS"},{idx: 1, name:"SPI2_SCK"},{idx: 2, name:"TIM1_BKIN"},{idx: 3, name:"SPI2_MOSI"},{idx: 4, name:"SPI2_MISO"}]}
+                   ,{id: 34, name:'PB13',type: 1, AFs:[{idx: 0, name:"SPI2_SCK"},{idx: 1, name:"SPI2_MISO"},{idx: 2, name:"TIM1_CH1N"},{idx: 3, name:"SPI2_NSS"},{idx: 4, name:"SPI2_MOSI"},{idx: 5, name:"I2C1_SCL"},{idx: 6, name:"TIM17_CH1"},{idx: 7, name:"TIM1_CH3N"}]}
+                   ,{id: 35, name:'PB14',type: 1, AFs:[{idx: 0, name:"SPI2_MISO"},{idx: 1, name:"SPI2_MOSI"},{idx: 2, name:"TIM1_CH2N"},{idx: 3, name:"SPI2_SCK"},{idx: 4, name:"SPI2_NSS"},{idx: 5, name:"I2C1_SDA"},{idx: 6, name:"TIM1_CH3"},{idx: 7, name:"TIM1_CH1"}]}
+                   ,{id: 36, name:'PB15',type: 1, AFs:[{idx: 0, name:"SPI2_MOSI"},{idx: 1, name:"SPI2_NSS"},{idx: 2, name:"TIM1_CH3N"},{idx: 3, name:"SPI2_MISO"},{idx: 4, name:"SPI2_SCK"},{idx: 6, name:"TIM1_CH2N"},{idx: 7, name:"TIM1_CH2"}]}
+                   ,{id: 37, name:'PC6', type: 1, AFs:[{idx: 1, name:"TIM3_CH1"},{idx: 6, name:"TIM3_CH3"},{idx: 7, name:"SPI1_NSS"}]}
+                   ,{id: 38, name:'PC7', type: 1, AFs:[{idx: 1, name:"TIM3_CH2"},{idx: 6, name:"TIM2_CH1"},{idx: 7, name:"SPI1_SCK"}]}
+                   ,{id: 39, name:'PC8', type: 1, AFs:[{idx: 1, name:"TIM3_CH3"},{idx: 6, name:"TIM2_CH2"}]}
+                   ,{id: 40, name:'PC9', type: 1, AFs:[{idx: 1, name:"TIM3_CH4"},{idx: 6, name:"TIM2_CH3"}]}
+                   ,{id: 41, name:'PA8', type: 1, AFs:[{idx: 0, name:"MCO"},{idx: 2, name:"TIM1_CH1"},{idx: 6, name:"TIM1_CH2"},{idx: 7, name:"TIM1_CH3"}]}
+                   ,{id: 42, name:'PA9', type: 1, AFs:[{idx: 1, name:"UART1_TX"},{idx: 2, name:"TIM1_CH2"},{idx: 3, name:"UART1_RX"},{idx: 4, name:"I2C1_SCL"},{idx: 5, name:"MCO"},{idx: 6, name:"TIM1_CH1N"}]}
+                   ,{id: 43, name:'PA10',type: 1, AFs:[{idx: 0, name:"TIM17_BKIN"},{idx: 1, name:"UART1_RX"},{idx: 2, name:"TIM1_CH3"},{idx: 3, name:"UART1_TX"},{idx: 4, name:"I2C1_SDA"},{idx: 5, name:"TIM1_CH1"},{idx: 6, name:"TIM16_CH1"}]}
+                   ,{id: 44, name:'PA11',type: 1, AFs:[{idx: 1, name:"UART1_CTS"},{idx: 2, name:"TIM1_CH4"},{idx: 3, name:"TIM1_CH3"},{idx: 4, name:"CAN1_RX"},{idx: 5, name:"I2C1_SCL"},{idx: 6, name:"TIM1_BKIN"},{idx: 6, name:"COMP1_OUT"}]}
+                   ,{id: 45, name:'PA12',type: 1, AFs:[{idx: 1, name:"UART1_RTS"},{idx: 2, name:"TIM1_ETR"},{idx: 3, name:"TIM1_CH3N"},{idx: 4, name:"CAN1_TX"},{idx: 5, name:"I2C1_SDA"},{idx: 6, name:"TIM1_CH2"},{idx: 6, name:"COMP2_OUT"}]}
+                   ,{id: 46, name:'PA13',type: 1, AFs:[{idx: 0, name:"SWDIO"},{idx: 3, name:"UART1_TX"}]}
+                   ,{id: 47, name:'PD2', type: 1, AFs:[{idx: 1, name:"I2C1_SCL"},{idx: 5, name:"SPI1_NSS"},{idx: 6, name:"SPI1_NSS"}]}
+                   ,{id: 48, name:'PD3', type: 1, AFs:[{idx: 1, name:"I2C1_SDA"},{idx: 5, name:"SPI1_SCK"},{idx: 6, name:"SPI1_NSS"}]}
+                   ,{id: 49, name:'PA14',type: 1, AFs:[{idx: 0, name:"SWDCLK"},{idx: 1, name:"UART2_TX"},{idx: 3, name:"UART1_RX"}]}
+                   ,{id: 50, name:'PA15',type: 1, AFs:[{idx: 0, name:"SPI1_NSS"},{idx: 1, name:"UART2_RX"},{idx: 2, name:"TIM2_CH1"},{idx: 3, name:"SPI2_SCK"},{idx: 4, name:"SPI2_MOSI"},{idx: 5, name:"SPI2_MISO"},{idx: 6, name:"TIM1_CH1N"},{idx: 7, name:"TIM1_CH3N"}]}
+                   ,{id: 51, name:'PC10',type: 1, AFs:[{idx: 0, name:"UART1_TX"},{idx: 3, name:"SPI2_MISO"},{idx: 4, name:"SPI2_SCK"},{idx: 5, name:"SPI2_NSS"},{idx: 6, name:"SPI2_MOSI"},{idx: 7, name:"COMP2_OUT"}]}
+                   ,{id: 52, name:'PC11',type: 1, AFs:[{idx: 0, name:"UART1_RX"},{idx: 3, name:"SPI2_MOSI"},{idx: 4, name:"SPI2_NSS"},{idx: 5, name:"SPI2_SCK"},{idx: 6, name:"SPI2_MISO"}]}
+                   ,{id: 53, name:'PC12',type: 1, AFs:[{idx: 0, name:"UART1_TX"},{idx: 3, name:"SPI2_SCK"},{idx: 4, name:"SPI2_MISO"},{idx: 5, name:"SPI2_MOSI"},{idx: 6, name:"SPI2_NSS"}]}
+                   ,{id: 54, name:'PD6', type: 1, AFs:[{idx: 1, name:"TIM3_ETR"},{idx: 3, name:"TIM1_CH3N"},{idx: 5, name:"TIM1_CH1"},{idx: 6, name:"TIM1_CH1N"}]}
+                   ,{id: 55, name:'PB3', type: 1, AFs:[{idx: 0, name:"SPI1_SCK"},{idx: 2, name:"TIM2_CH2"},{idx: 4, name:"TIM1_CH1"},{idx: 6, name:"TIM1_CH2N"},{idx: 7, name:"TIM1_CH3"}]}
+                   ,{id: 56, name:'PB4', type: 1, AFs:[{idx: 0, name:"SPI1_MISO"},{idx: 1, name:"TIM3_CH1"},{idx: 4, name:"TIM1_CH2"},{idx: 5, name:"TIM17_BKIN"},{idx: 6, name:"TIM1_CH3N"},{idx: 7, name:"TIM1_CH2N"}]}
+                   ,{id: 57, name:'PB5', type: 1, AFs:[{idx: 0, name:"SPI1_MOSI"},{idx: 1, name:"TIM3_CH2"},{idx: 2, name:"TIM16_BKIN"},{idx: 6, name:"TIM1_CH1"},{idx: 7, name:"TIM1_CH2"}]}
+                   ,{id: 58, name:'PB6', type: 1, AFs:[{idx: 0, name:"UART1_TX"},{idx: 1, name:"I2C1_SCL"},{idx: 2, name:"TIM16_CH1N"},{idx: 4, name:"TIM1_CH2N"},{idx: 6, name:"TIM1_CH2"},{idx: 7, name:"TIM1_CH1N"}]}
+                   ,{id: 59, name:'PB7', type: 1, AFs:[{idx: 0, name:"UART1_RX"},{idx: 1, name:"I2C1_SDA"},{idx: 2, name:"TIM17_CH1N"},{idx: 6, name:"TIM1_CH3"},{idx: 7, name:"TIM1_CH1"}]}
+                   ,{id: 60, name:'BOOT0',type: 7}
+                   ,{id: 61, name:'PB8', type: 1, AFs:[{idx: 0, name:"UART1_RX"},{idx: 1, name:"I2C1_SCL"},{idx: 2, name:"TIM16_CH1"},{idx: 3, name:"TIM1_CH1"},{idx: 4, name:"CAN1_RX"},{idx: 6, name:"TIM3_CH2"}]}
+                   ,{id: 62, name:'PB9', type: 1, AFs:[{idx: 0, name:"UART1_TX"},{idx: 1, name:"I2C1_SDA"},{idx: 2, name:"TIM17_CH1"},{idx: 4, name:"CAN1_TX"},{idx: 5, name:"SPI2_NSS"},{idx: 6, name:"TIM3_CH3"}]}
+                   ,{id: 63, name:'VSS', type: 3}
+                   ,{id: 64, name:'VDD', type: 2}
+                ]         
+            },
+            computed: {
+                leftpins:{
+                    get(){
+                        return this.pins.slice(0, 16)
+                    }
+                },
+                bottompins:{
+                    get(){
+                        return this.pins.slice(16, 32)
+                    }
+                },
+                rightpins:{
+                    get(){
+                        return this.pins.slice(32, 48).reverse()
+                    }
+                },
+                toppins:{
+                    get(){
+                        return this.pins.slice(48, 64).reverse()
+                    }
+                },
+            },
+
+            // ^P[ABCDEFGH]\d+$
+            methods: {
+                pintypeclass4name(value){
+                    if (value.type === 1){
+                        return 'pingpio' + value.name.substring(0, 2).toLowerCase();
+                    } 
+                    if (value.type === 7){
+                        console.log(this.class4pinnametype[value.type])
+                    }
+                    return this.class4pinnametype[value.type];
+                },
+                pintypeclass4af(value){
+                    if (value.type != 1){
+                        return this.class4pinaftype[1]
+                    }
+                    return this.class4pinaftype[0];
+                },
+                rotateleft(){
+                    if (this.rotateedge === 270){
+                        this.rotateedge = 0
+                    } else {
+
+                    }
+                },
+                rotateright(value){
+                    this.rotateedge = this.rotateedge + value;
+                    this.chiplookstyle.transform = 'rotate(' + this.rotateedge + 'deg)'
+                },
+                rotateleft(value){
+                    this.rotateedge = this.rotateedge - value;
+                    this.chiplookstyle.transform = 'rotate(' + this.rotateedge + 'deg)'
+                }
+            }
+        })
+    </script>
+</html>
+
+
