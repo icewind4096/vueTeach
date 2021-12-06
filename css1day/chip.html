@@ -62,6 +62,28 @@
             /* background-color:green; */
         }
 
+        .pinnumV{
+            width: 16px;    
+            height: 15px;
+            line-height: 15px;
+            text-align: right;
+            margin-bottom: 13px;
+            border: 1px solid rgba(0, 0, 0, 0);     /*不想重新计算位置，还是画边框，但是边框全透明*/
+            color: white;
+        }
+
+        .pinnumH{
+            float: left;
+            width: 15px;    
+            height: 78px;
+            text-align: right;
+            writing-mode:sideways-lr;
+            margin-right: 15px;
+            color: white;
+            /* transform: rotate(-90deg);
+            transform-origin: 50% 10% 0; */
+        }
+
         .pingpiopa{
             border: 1px solid black;
             color: black;
@@ -156,30 +178,19 @@
             height: 15px;
         }
 
-        .pintopnum{
-            float: left;
-            width: 15px;    
-            text-align: right;
-            writing-mode:sideways-lr;
-            margin-right: 15px;
-            color: white;
-        }
-
         .chiptoppinnamerect{
-            left: 0px;                                 
-            top: -80px;
+            left: 194px;                                 
+            top: -274px;
             margin-left: 29px;                          /*chipbody.height - .pinrectV.height = 518px - 468px = 50px, 50px / 2 = 25px*/
             /* background-color: blueviolet; */
+            transform: rotate(-90deg);
         }
 
         .pintopname{
-            float: left;
-            width: 15px;    
-            height: 78px;
-            text-align: left;
+            width: 78px;    
+            height: 15px;
             line-height: 15px;
-            writing-mode:sideways-lr;
-            margin-right: 13px;
+            margin-bottom: 13px;
         }
 
         .pintopname:hover{
@@ -189,21 +200,19 @@
         }
 
         .chiptoppinafrect{
-            left: 0px; 
-            top: -188px;                                 /*自身高度80px + 偏移第一个name高度80px + 间隔 28px = 189*/           
+            left: 194px; 
+            top: -384px;                                 /*自身高度80px + 偏移第一个name高度80px + 间隔 28px = 189*/           
             margin-left: 29px;
+            transform: rotate(-90deg);
             /* background-color:rebeccapurple; */
         }
 
         .pintopafname{
-            float: left;
-            width: 15px;    
-            height: 78px;
-            color: white;
-            text-align: left;
+            width: 78px;    
+            height: 15px;
             line-height: 15px;
-            writing-mode:sideways-lr;
-            margin-right: 13px;
+            margin-bottom: 13px;
+            color: white;
             border: 1px solid black;
             background-color:indianred;
         }
@@ -220,29 +229,19 @@
             margin-left: 30px;                          /*chipbody.height - .pinrectV.height = 518px - 468px = 50px, 50px / 2 = 25px*/
         }
 
-        .pinbottomnum{
-            float: left;
-            width: 15px;    
-            height: 78px;
-            text-align: right;
-            writing-mode:sideways-lr;
-            margin-right: 15px;
-            color: white;
-        }
-
         .chipbottompinnamerect{
-            left: 0px;                                 
-            top: 518px;
+            left: 194px;                                 
+            top: 324px;
             margin-left: 29px;                          /*chipbody.height - .pinrectV.height = 518px - 468px = 50px, 50px / 2 = 25px*/
+            transform: rotate(-90deg);
         }
 
         .pinbottomname{
-            float: left;
-            width: 15px;    
-            height: 78px;
+            width: 78px;    
+            height: 15px;
+            line-height: 15px;
             text-align: right;
-            writing-mode:sideways-lr;
-            margin-right: 13px;
+            margin-bottom: 13px;
         }
 
         .pinbottomname:hover{
@@ -252,20 +251,20 @@
         }
 
         .chipbottompinafrect{
-            left: -1px; 
-            top: 626px;                                     
+            left: 194px; 
+            top: 434px;                                     
             margin-left: 29px;
             /* background-color:rebeccapurple; */
+            transform: rotate(-90deg);
         }
 
         .pinbottomafname{
-            float: left;
-            width: 15px;    
-            height: 78px;
             color: white;
+            width: 78px;    
+            height: 15px;
+            line-height: 15px;
             text-align: right;
-            writing-mode:sideways-lr;
-            margin-right: 13px;
+            margin-bottom: 13px;
             border: 1px solid black;
             background-color:indianred;
         }
@@ -281,16 +280,6 @@
             top: -1px;
             width: 18px;
             margin-top: 25px;
-        }
-
-        .pinrighnum{
-            width: 16px;    
-            height: 15px;
-            line-height: 15px;
-            text-align: right;
-            margin-bottom: 13px;
-            border: 1px solid rgba(0, 0, 0, 0);     /*不想重新计算位置，还是画边框，但是边框全透明*/
-            color: white;
         }
 
         .chiprightpinnamerect{
@@ -340,16 +329,6 @@
 
         .chipleftpinnumrect{
             margin-top: 24px;
-        }
-
-        .pinleftnum{
-            width: 16px;    
-            height: 15px;
-            line-height: 15px;
-            text-align: right;
-            margin-bottom: 13px;
-            border: 1px solid rgb(0, 0, 0);
-            color: white;
         }
 
         .chipleftpinnamerect{
@@ -427,7 +406,7 @@
                 <!-- 左边pin脚 -->
                 <div class="pinrectV chipleftpinnumrect">
                     <ul class="pininfo"> 
-                        <li class="pinleftnum" v-for="(item,index) in leftpins" :key="index">{{item.id}}</li>
+                        <li class="pinnumV" v-for="(item,index) in leftpins" :key="index">{{item.id}}</li>
                     </ul>
                 </div>
                 <div class="pinrectV chipleftpinnamerect">
@@ -443,15 +422,15 @@
                 <!-- 底部pin脚 -->
                 <div class="pinrectH chipbottompinnumrect">
                     <ul class="pininfo"> 
-                        <li class="pinbottomnum" v-for="(item,index) in bottompins" :key="index">{{item.id}}</li>
+                        <li class="pinnumH" v-for="(item,index) in bottompins" :key="index">{{item.id}}</li>
                     </ul>
                 </div>
-                <div class="pinrectH chipbottompinnamerect">
+                <div class="pinrectV chipbottompinnamerect">
                     <ul class="pininfo"> 
                         <li class="pinbottomname" :class="pintypeclass4name(item)" v-for="(item,index) in bottompins" :key="index">{{item.name}}&nbsp;</li>
                     </ul>
                 </div>
-                <div class="pinrectH chipbottompinafrect">
+                <div class="pinrectV chipbottompinafrect">
                     <ul class="pininfo"> 
                         <li class="pinbottomafname" :class="pintypeclass4af(item)" v-for="(item,index) in bottompins" :key="index">{{item.AFs === undefined ? '' : item.AFs[0].name}}</li>
                     </ul>
@@ -459,7 +438,7 @@
                 <!-- 右边pin脚 -->
                 <div class="pinrectV chiprightpinnumrect">
                     <ul class="pininfo"> 
-                        <li class="pinrighnum" v-for="(item,index) in rightpins" :key="index">{{item.id}}</li>
+                        <li class="pinnumV" v-for="(item,index) in rightpins" :key="index">{{item.id}}</li>
                     </ul>
                 </div>
                 <div class="pinrectV chiprightpinnamerect">
@@ -475,15 +454,15 @@
                 <!-- 上部pin脚 -->
                 <div class="pinrectH chiptoppinnumrect">
                     <ul class="pininfo"> 
-                        <li class="pintopnum" v-for="(item,index) in toppins" :key="index">{{item.id}}</li>
+                        <li class="pinnumH" v-for="(item,index) in toppins" :key="index">{{item.id}}</li>
                     </ul>
                 </div>
-                <div class="pinrectH chiptoppinnamerect">
+                <div class="pinrectV chiptoppinnamerect">
                     <ul class="pininfo"> 
                         <li class="pintopname" :class="pintypeclass4name(item)" v-for="(item,index) in toppins" :key="index">&nbsp;{{item.name}}</li>
                     </ul>
                 </div>
-                <div class="pinrectH chiptoppinafrect">
+                <div class="pinrectV chiptoppinafrect">
                     <ul class="pininfo"> 
                         <li class="pintopafname" :class="pintypeclass4af(item)" v-for="(item,index) in toppins" :key="index">{{item.AFs === undefined ? '' : item.AFs[0].name}}</li>
                     </ul>
