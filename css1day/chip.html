@@ -20,7 +20,7 @@
         --func2funcOffset: 28px;
         --pinnumwidth: 16px;
 
-        --bodyOffsetX: 300px;
+        --bodyOffsetY: 300px;
         --bodyLogoFontName: 'Courier New', Courier, monospace;
         --bodyBoardWidth: 1px;
         --bodyBoardColor: black;
@@ -51,7 +51,7 @@
         position: relative;
         font-family: var(--bodyLogoFontName);
         font-size: 12px;
-        margin: var(--bodyOffsetX) auto;
+        margin: var(--bodyOffsetY) auto;
         border: var(--bodyBoardWidth) solid var(--bodyBoardColor);
         height: calc((var(--pinCount) / var(--sideCount)) * (var(--pinHeight) + var(--pin2pinOffset) + var(--bodyBoardWidth) * 2) - var(--pin2pinOffset) + 2 * var(--pin2Edge));
         width: calc((var(--pinCount) / var(--sideCount)) * (var(--pinHeight) + var(--pin2pinOffset) + var(--bodyBoardWidth) * 2) - var(--pin2pinOffset) + 2 * var(--pin2Edge));
@@ -87,6 +87,7 @@
         background: linear-gradient(215deg,blue, gold);
         -webkit-text-fill-color:transparent;
         -webkit-background-clip: text;            
+        background-clip: text;
     }
 
     .unvisiable{
@@ -163,7 +164,6 @@
         position: absolute;
         height: calc((var(--pinCount) / var(--sideCount)) * (var(--pinHeight) + var(--pin2pinOffset) + var(--bodyBoardWidth) * 2) - var(--pin2pinOffset));
         width: calc(var(--pinWidth) + 4 * var(--bodyBoardWidth));     
-        /* background-color:red; */
     }
 
     .pinrectV{
@@ -195,53 +195,44 @@
         left: var(--pin2Edge);
         top: var(--pinnumwidth);
         width: var(--pinnumwidth);
-        /* background-color: cornflowerblue; */
      }
 
      .leftpinnamerect{
         left: calc(0px - 4 * var(--bodyBoardWidth) - var(--pinWidth));
-        /* background-color: violet; */
      }
 
      .rightnamerect{
         /* left: calc((var(--pinCount) / var(--sideCount)) * (var(--pinHeight) + var(--pin2pinOffset) + var(--bodyBoardWidth) * 2) - var(--pin2pinOffset) + 2 * var(--pin2Edge)); */
         left: calc(var(--widthRate) * ((var(--pinCount) / var(--sideCount)) * (var(--pinHeight) + var(--pin2pinOffset) + var(--bodyBoardWidth) * 2) - var(--pin2pinOffset) + 2 * var(--pin2Edge)));
-        /* background-color: violet; */
     }
 
     .buttonnamerect{
         left: var(--pin2Edge);
         top: calc((var(--pinCount) / var(--sideCount)) * (var(--pinHeight) + var(--pin2pinOffset) + var(--bodyBoardWidth) * 2) - var(--pin2pinOffset) + 2 * var(--pin2Edge) + var(--pinWidth) + 4 * var(--bodyBoardWidth));
-        /* background-color: violet; */
     }
 
     .topnamerect{
         left: var(--pin2Edge);
         top: 0px;
-        /* background-color: cornflowerblue; */
     }
 
      .leftpinafrect{
         left: calc(0px - 4 * var(--bodyBoardWidth) - 2 * var(--pinWidth) - var(--func2funcOffset));
-        /* background-color: violet; */
      }
 
      .rightpinafrect{
         /* left: calc((((var(--pinCount) / var(--sideCount)) * (var(--pinHeight) + var(--pin2pinOffset) + var(--bodyBoardWidth) * 2) - var(--pin2pinOffset) + 2 * var(--pin2Edge)) + var(--pinWidth) + 4 * var(--bodyBoardWidth) + var(--func2funcOffset))); */
         left: calc((var(--widthRate) * ((var(--pinCount) / var(--sideCount)) * (var(--pinHeight) + var(--pin2pinOffset) + var(--bodyBoardWidth) * 2) - var(--pin2pinOffset) + 2 * var(--pin2Edge))) + var(--pinWidth) + 4 * var(--bodyBoardWidth) + var(--func2funcOffset));
-        /* background-color: violet; */
      }
 
      .buttonpinafrect{
         left: var(--pin2Edge);
         top: calc((var(--pinCount) / var(--sideCount)) * (var(--pinHeight) + var(--pin2pinOffset) + var(--bodyBoardWidth) * 2) - var(--pin2pinOffset) + 2 * var(--pin2Edge) + var(--pinWidth) + 4 * var(--bodyBoardWidth) + 1px + var(--pinWidth) + var(--func2funcOffset));
-        /* background-color: violet; */
      }
 
      .toppinafrect{
         left: var(--pin2Edge);
         top: calc(0px - (var(--pin2Edge) + var(--pinWidth) + var(--func2funcOffset)));
-        /* background-color: chocolate; */
      }
 
      .pincell{
@@ -298,7 +289,7 @@
             position: relative;
             font-family: var(--bodyLogoFontName);
             font-size: 12px;
-            margin: var(--bodyOffsetX) auto;
+            margin: var(--bodyOffsetY) auto;
             border: var(--bodyBoardWidth) solid var(--bodyBoardColor);
             height: calc((var(--pinCount) / var(--sideCount)) * (var(--pinHeight) + var(--pin2pinOffset) + var(--bodyBoardWidth) * 2) - var(--pin2pinOffset) + 2 * var(--pin2Edge));
             width: calc(var(--widthRate) * ((var(--pinCount) / var(--sideCount)) * (var(--pinHeight) + var(--pin2pinOffset) + var(--bodyBoardWidth) * 2) - var(--pin2pinOffset) + 2 * var(--pin2Edge)));
@@ -413,45 +404,6 @@
                 </ul>
             </div>
         </div>
-
-        <!-- TSSOP 主体 -->
-        <!-- <div v-if="(showchip === true) && (chipinfo.package === 2)" class="chipbodytssop" :style="chiplookstyle">
-            <div class="pinrect pinrectV leftpinnumbrect">
-                <ul class="pinrectstyle"> 
-                    <li class="pinrightcell pinnumcell" v-for="(item,index) in leftpins" :key="index">{{item.id}}</li>
-                </ul>
-            </div>
-            
-            <div class="pinrect pinrectV leftpinnamerect">
-                <ul class="pinrectstyle"> 
-                    <li class="pincell pinname pinrightcell" :class="pintypeclass4name(item)" v-for="(item,index) in leftpins" :key="index">{{item.name}}</li>
-                </ul>
-            </div>
-
-            <div class="pinrect pinrectV leftpinafrect">
-                <ul class="pinrectstyle"> 
-                    <li class="pincell pinaf pinleftcell" :class="pintypeclass4af(item)" v-for="(item,index) in leftpins" :key="index">{{item.AFs === undefined ? '' : item.AFs[0].name}}</li>
-                </ul>
-            </div> 
-
-            <div class="pinrect pinrectV rightpinnumbrect">
-                <ul class="pinrectstyle"> 
-                    <li class="pinrightcell pinnumcell" v-for="(item,index) in rightpins" :key="index">{{item.id}}</li>
-                </ul>
-            </div>
-            
-            <div class="pinrect pinrectV rightnamerect">
-                <ul class="pinrectstyle"> 
-                    <li class="pincell pinname pinleftcell" :class="pintypeclass4name(item)" v-for="(item,index) in rightpins" :key="index">{{item.name}}</li>
-                </ul>
-            </div>
-
-            <div class="pinrect pinrectV rightpinafrect">
-                <ul class="pinrectstyle"> 
-                    <li class="pincell pinaf pinrightcell" :class="pintypeclass4af(item)" v-for="(item,index) in rightpins" :key="index">{{item.AFs === undefined ? '' : item.AFs[0].name}}</li>
-                </ul>
-            </div>  
-        </div> -->
     </div>
 </body>
 
@@ -551,6 +503,11 @@
             class4pinaftype: ['', 'unvisiable'],
         },
         computed: {
+            visualpincount:{
+                get(){
+                    return this.pincount % this.sidecount === 0 ? this.pincount : Number(this.pincount) + Number(this.sidecount) - Number(this.pincount % this.sidecount);
+                }                
+            },
             widthrate:{
                 get(){
                     if (this.chipinfo.package === 2){
@@ -568,32 +525,80 @@
                     }
                 }
             },
-            sidepincount: {
+            pincount:{
                 get(){
-                    return this.chipinfo.pincount / this.sidecount;                
+                    return this.chipinfo.pincount;
+                }
+            },
+            pins:{
+                get(){
+                    return this.chipinfo.pins.slice(0, this.pincount)
+                }
+            },
+            precalcpinsindex:{
+                get(){
+                    pinsindex = [0,0,0,0]
+                    var count = this.pincount;
+                    while (count > 0){
+                        for (let i = 0; i < this.sidecount; i ++){
+                            if (count == 0){
+                                break;
+                            }
+                            pinsindex[i] = pinsindex[i] + 1;
+                            count = count - 1;
+                        }
+                    }
+                    return pinsindex;
+                }
+            },
+            leftpinendindex:{
+                get(){
+                    return this.precalcpinsindex[0]
                 }
             },
             leftpins:{
                 get(){
-                    return this.chipinfo.pins.slice(0, this.sidepincount * 1)
+                    return this.pins.slice(0, this.leftpinendindex)
+                }
+            },
+            bottompinendindex:{
+                get(){
+                    return this.precalcpinsindex[0] + this.precalcpinsindex[1];
                 }
             },
             bottompins:{
                 get(){
-                    return this.chipinfo.pins.slice(this.sidepincount * 1, this.sidepincount * 2)
+                    if (this.sidecount === 2){
+                        return null;
+                    }
+                    return this.pins.slice(this.leftpinendindex, this.bottompinendindex)
+                }
+            },
+            rightpinendindex:{
+                get(){
+                    if (this.sidecount === 2){
+                        return this.precalcpinsindex[0] + this.precalcpinsindex[1];
+                    } else {
+                        return this.precalcpinsindex[0] + this.precalcpinsindex[1] + this.precalcpinsindex[2];
+                    }
                 }
             },
             rightpins:{
                 get(){
-                    if (this.chipinfo.package === 2){
-                        return this.chipinfo.pins.slice(this.sidepincount * 1, this.sidepincount * 2).reverse()
+                    if (this.sidecount === 2){
+                        return this.pins.slice(this.leftpinendindex, this.rightpinendindex).reverse()
                     }
-                    return this.chipinfo.pins.slice(this.sidepincount * 2, this.sidepincount * 3).reverse()
+                    return this.pins.slice(this.bottompinendindex, this.rightpinendindex).reverse()
+                }
+            },
+            toppinendindex:{
+                get(){
+                    return this.precalcpinsindex[0] + this.precalcpinsindex[1] + this.precalcpinsindex[2] + this.precalcpinsindex[3];
                 }
             },
             toppins:{
                 get(){
-                    return this.chipinfo.pins.slice(this.sidepincount * 3, this.sidepincount * 4).reverse()
+                    return this.pins.slice(this.rightpinendindex, this.toppinendindex).reverse();
                 }
             },
         },
@@ -631,14 +636,14 @@
                 this.chiplookstyle.transform = 'rotate(' + this.rotateedge + 'deg)'
             },
             changewidthrate(value){
-                document.body.style.setProperty('--pinCount', this.chipinfo.pincount);
+                document.body.style.setProperty('--pinCount', this.visualpincount);
                 document.body.style.setProperty('--sideCount', this.sidecount);
                 document.body.style.setProperty('--widthRate', event.target.value);
                 this.showchip = true;
             },
             redrawchip(event){
                 this.chipinfo.pincount = event.target.value;
-                document.body.style.setProperty('--pinCount', this.chipinfo.pincount);
+                document.body.style.setProperty('--pinCount', this.visualpincount);
                 document.body.style.setProperty('--sideCount', this.sidecount);
                 document.body.style.setProperty('--widthRate', this.widthrate);
                 this.showchip = true;
@@ -652,7 +657,7 @@
                     this.chipinfo.chipbody = 'chipbodylqfp'
                 }
 
-                document.body.style.setProperty('--pinCount', this.chipinfo.pincount);
+                document.body.style.setProperty('--pinCount', this.visualpincount);
                 document.body.style.setProperty('--sideCount', this.sidecount);
                 document.body.style.setProperty('--widthRate', this.widthrate);
                 this.showchip = true;
