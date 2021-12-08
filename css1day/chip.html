@@ -90,6 +90,10 @@
         background-clip: text;
     }
 
+    .abc{
+        border: 1px solid white;
+    }
+
     .unvisiable{
         visibility: hidden;
      }
@@ -420,16 +424,25 @@
                 name: 'MM32F0131C7P',
                 manufacturer: 'MindMotion',
 
-                pincount: 64,
-                package: 1, //type: 0-reserve 1-lqfp 2-tssop 3 qfn 4 bga
+                // pincount: 64,
+                // package: 1, //type: 0-reserve 1-lqfp 2-tssop 3 qfn 4 bga
+                // chipbody: 'chipbodylqfp',
 
-                chipbody: 'chipbodylqfp',
+                pincount: 20,
+                package: 2, //type: 0-reserve 1-lqfp 2-tssop 3 qfn 4 bga
+                chipbody: 'chipbodytssop',
+
+                // pinassign:[
+                //     {count: 2,  aligment: 0},
+                //     {count: 1,  aligment: 0},
+                //     {count: 6,  aligment: 0},
+                //     {count: 4,  aligment: 0},
+                // ],
+                pinaligment: 1,        //type: 0-left 1-right
                 displaylogoname: true,
                 displaylogoline: true,
                 displaylogomanu: true,
 
-                // pincount: 20,
-                // package: 2, //type: 0-reserve 1-lqfp 2-tssop 3 qfn 4 bga
 
                 pins:[
                      {id: 1,  name:'PD7', type: 1, AFs:[{idx: 5, name:"TIM3_CH1"},{idx: 6, name:"TIM17_CH1"}]}
@@ -503,9 +516,29 @@
             class4pinaftype: ['', 'unvisiable'],
         },
         computed: {
+            maxsidepincount:{
+                get(){
+                    let count = 0;
+                    for (let i = 0; i < this.sidecount; i ++){
+                        if (count < this.chipinfo.pinassign[i].count){
+                            count = this.chipinfo.pinassign[i].count;
+                        }
+                    }
+                    return count;
+                }
+            },
             visualpincount:{
                 get(){
-                    return this.pincount % this.sidecount === 0 ? this.pincount : Number(this.pincount) + Number(this.sidecount) - Number(this.pincount % this.sidecount);
+                    if (this.chipinfo.pinassign === undefined){
+                        return this.pincount % this.sidecount === 0 ? this.pincount : Number(this.pincount) + Number(this.sidecount) - Number(this.pincount % this.sidecount);
+                    } else {
+                        return this.maxsidepincount * this.sidecount
+                    }
+                }                
+            },
+            visualsidepincount:{
+                get(){
+                    return this.visualpincount / this.sidecount;
                 }                
             },
             widthrate:{
@@ -527,7 +560,15 @@
             },
             pincount:{
                 get(){
-                    return this.chipinfo.pincount;
+                    if (this.chipinfo.pinassign != undefined){
+                        var totalcount = 0;
+                        for (let i = 0; i < this.chipinfo.pinassign.length; i ++){
+                            totalcount = totalcount + this.chipinfo.pinassign[i].count;
+                        }
+                        return totalcount;
+                    } else {
+                        return this.chipinfo.pincount;
+                    }
                 }
             },
             pins:{
@@ -538,16 +579,23 @@
             precalcpinsindex:{
                 get(){
                     pinsindex = [0,0,0,0]
-                    var count = this.pincount;
-                    while (count > 0){
-                        for (let i = 0; i < this.sidecount; i ++){
-                            if (count == 0){
-                                break;
+                    if (this.chipinfo.pinassign != undefined){
+                        for (let i = 0; i < this.chipinfo.pinassign.length; i ++){
+                            pinsindex[i] = this.chipinfo.pinassign[i].count;
+                        }
+                    } else {
+                        var count = this.pincount;
+                        while (count > 0){
+                            for (let i = 0; i < this.sidecount; i ++){
+                                if (count == 0){
+                                    break;
+                                }
+                                pinsindex[i] = pinsindex[i] + 1;
+                                count = count - 1;
                             }
-                            pinsindex[i] = pinsindex[i] + 1;
-                            count = count - 1;
                         }
                     }
+
                     return pinsindex;
                 }
             },
@@ -558,7 +606,16 @@
             },
             leftpins:{
                 get(){
-                    return this.pins.slice(0, this.leftpinendindex)
+                    let pininfos = this.pins.slice(0, this.leftpinendindex);
+                    if ((this.chipinfo.pinassign != undefined && this.chipinfo.pinassign[0].aligment != undefined && this.chipinfo.pinassign[0].aligment === 1) 
+                    || (this.chipinfo.pinassign === undefined && this.pinaligment === 1)){
+                        while (pininfos.length < this.visualsidepincount){
+                            pininfos.unshift({})
+                        }
+                    }
+
+                    return pininfos;
+
                 }
             },
             bottompinendindex:{
@@ -568,10 +625,19 @@
             },
             bottompins:{
                 get(){
-                    if (this.sidecount === 2){
-                        return null;
+                    let pininfos = [];
+                    if (this.sidecount === 4){
+                        pininfos = this.pins.slice(this.leftpinendindex, this.bottompinendindex);
                     }
-                    return this.pins.slice(this.leftpinendindex, this.bottompinendindex)
+
+                    if ((this.chipinfo.pinassign != undefined && this.chipinfo.pinassign[1].aligment != undefined && this.chipinfo.pinassign[1].aligment === 1) 
+                    || (this.chipinfo.pinassign === undefined && this.pinaligment === 1)){
+                        while (pininfos.length < this.visualsidepincount){
+                            pininfos.unshift({})
+                        }
+                    }
+
+                    return pininfos;
                 }
             },
             rightpinendindex:{
@@ -583,12 +649,29 @@
                     }
                 }
             },
+            pinaligment:{
+                get(){
+                    return this.chipinfo.pinaligment;
+                }
+            },
             rightpins:{
                 get(){
+                    let pininfos = [];
                     if (this.sidecount === 2){
-                        return this.pins.slice(this.leftpinendindex, this.rightpinendindex).reverse()
+                        pininfos = this.pins.slice(this.leftpinendindex, this.rightpinendindex).reverse()
                     }
-                    return this.pins.slice(this.bottompinendindex, this.rightpinendindex).reverse()
+                    else {
+                        pininfos = this.pins.slice(this.bottompinendindex, this.rightpinendindex).reverse()
+                    } 
+                    if ((this.sidecount === 4 && this.chipinfo.pinassign != undefined && this.chipinfo.pinassign[2].aligment != undefined && this.chipinfo.pinassign[2].aligment === 0) 
+                    || ((this.sidecount === 2 && this.chipinfo.pinassign != undefined && this.chipinfo.pinassign[1].aligment != undefined && this.chipinfo.pinassign[1].aligment === 0) 
+                    || (this.chipinfo.pinassign === undefined && this.pinaligment === 0))){
+                        while (pininfos.length < this.visualsidepincount){
+                            pininfos.unshift({})
+                        }
+                    }
+
+                    return pininfos;
                 }
             },
             toppinendindex:{
@@ -598,7 +681,14 @@
             },
             toppins:{
                 get(){
-                    return this.pins.slice(this.rightpinendindex, this.toppinendindex).reverse();
+                    let pininfos = this.pins.slice(this.rightpinendindex, this.toppinendindex).reverse();
+                    if ((this.sidecount === 4 && this.chipinfo.pinassign != undefined && this.chipinfo.pinassign[3].aligment != undefined && this.chipinfo.pinassign[3].aligment === 0) 
+                    || (this.chipinfo.pinassign === undefined && this.pinaligment === 0)){
+                        while (pininfos.length < this.visualsidepincount){
+                            pininfos.unshift({})
+                        }
+                    }
+                    return pininfos;
                 }
             },
         },
@@ -609,6 +699,9 @@
         // ^P[ABCDEFGH]\d+$
         methods: {
             pintypeclass4name(value){
+                if (value.id === undefined){
+                    return 'unvisiable'; 
+                }
                 if (value.type === 1){
                     return this.class4pintype[value.type] + value.name.substring(1, 2).toLowerCase();
                 } 
