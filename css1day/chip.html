@@ -274,7 +274,7 @@
     }
 
     .pinrightcell:hover{
-        box-shadow: 1px 3px #909090;
+        box-shadow: 2px 3px #909090;
         color: white;
         background-color: rgba(32, 64, 128, 0.5);
     }
@@ -282,6 +282,12 @@
     .pinleftcell{
         padding-left: var(--pinLeftPad);
         text-align: left;
+    }
+
+    .pinleftcell:hover{
+        box-shadow: 1px 3px #909090;
+        color: white;
+        background-color: rgba(32, 64, 128, 0.5);
     }
 
     .pincentercell{
@@ -334,13 +340,13 @@
             <!-- 左边pin脚 -->
             <div class="pinrect pinrectV leftpinnumbrect">
                 <ul class="pinrectstyle"> 
-                    <li class="pinrightcell pinnumcell" v-for="(item,index) in leftpins" :key="index">{{item.id}}</li>
+                    <li class="pinleftcell pinnumcell" v-for="(item,index) in leftpins" :key="index">{{item.id}}</li>
                 </ul>
             </div>
             
             <div class="pinrect pinrectV leftpinnamerect">
                 <ul class="pinrectstyle"> 
-                    <li class="pincell pinname pinrightcell" :class="pintypeclass4name(item)" v-for="(item,index) in leftpins" :key="index">{{item.name}}</li>
+                    <li class="pincell pinname pinleftcell" :class="pintypeclass4name(item)" v-for="(item,index) in leftpins" :key="index">{{item.name}}</li>
                     <!-- <li class="pincell pinname pincentercell" :class="pintypeclass4name(item)" v-for="(item,index) in leftpins" :key="index">{{item.name}}</li> -->
                 </ul>
             </div>
@@ -360,7 +366,7 @@
 
             <div v-if="chipinfo.package === 1" class="pinrect pinrectV nroatte90 buttonnamerect">
                 <ul class="pinrectstyle"> 
-                    <li class="pincell pinname pinrightcell" :class="pintypeclass4name(item)" v-for="(item,index) in bottompins" :key="index">{{item.name}}&nbsp;</li>
+                    <li class="pincell pinname pinleftcell" :class="pintypeclass4name(item)" v-for="(item,index) in bottompins" :key="index">{{item.name}}&nbsp;</li>
                 </ul>
             </div>
 
@@ -379,7 +385,7 @@
             
             <div class="pinrect pinrectV rightnamerect">
                 <ul class="pinrectstyle"> 
-                    <li class="pincell pinname pinleftcell" :class="pintypeclass4name(item)" v-for="(item,index) in rightpins" :key="index">{{item.name}}</li>
+                    <li class="pincell pinname pinrightcell" :class="pintypeclass4name(item)" v-for="(item,index) in rightpins" :key="index">{{item.name}}</li>
                 </ul>
             </div>
 
@@ -424,13 +430,13 @@
                 name: 'MM32F0131C7P',
                 manufacturer: 'MindMotion',
 
-                // pincount: 64,
-                // package: 1, //type: 0-reserve 1-lqfp 2-tssop 3 qfn 4 bga
-                // chipbody: 'chipbodylqfp',
+                pincount: 64,
+                package: 1, //type: 0-reserve 1-lqfp 2-tssop 3 qfn 4 bga
+                chipbody: 'chipbodylqfp',
 
-                pincount: 20,
-                package: 2, //type: 0-reserve 1-lqfp 2-tssop 3 qfn 4 bga
-                chipbody: 'chipbodytssop',
+                // pincount: 20,
+                // package: 2, //type: 0-reserve 1-lqfp 2-tssop 3 qfn 4 bga
+                // chipbody: 'chipbodytssop',
 
                 // pinassign:[
                 //     {count: 2,  aligment: 0},
@@ -438,7 +444,7 @@
                 //     {count: 6,  aligment: 0},
                 //     {count: 4,  aligment: 0},
                 // ],
-                pinaligment: 1,        //type: 0-left 1-right
+                pinaligment: 0,        //type: 0-left 1-right
                 displaylogoname: true,
                 displaylogoline: true,
                 displaylogomanu: true,
