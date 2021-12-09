@@ -40,6 +40,8 @@
         --logoChipManuFontName: Arial, Helvetica, sans-serif; 
 
         --pinLeftPad: 2px;
+        --afdropdownleftpad: 20px;          /*用于给af功能的dropdown留出边距，要不af的list太长，会遮盖到一个af功能*/
+        --afdropdownwidth: 120px;
     }
 
     *{
@@ -88,10 +90,6 @@
         -webkit-text-fill-color:transparent;
         -webkit-background-clip: text;            
         background-clip: text;
-    }
-
-    .abc{
-        border: 1px solid white;
     }
 
     .unvisiable{
@@ -284,7 +282,7 @@
         text-align: left;
     }
 
-    .pinleftcell:hover{
+    .pinname:hover{
         box-shadow: 1px 3px #909090;
         color: white;
         background-color: rgba(32, 64, 128, 0.5);
@@ -294,6 +292,58 @@
         text-align: center;
     }
 
+    .pinafdropdownlistV{
+        display: none;
+        position: absolute;
+        z-index: 9999; 
+        left: var(--afdropdownleftpad);
+        width: calc(var(--afdropdownwidth) + 2 * var(--bodyBoardWidth));
+        border: 1px solid black;
+    }
+
+    .pinaf:hover{
+        color: white;
+        background-color:indigo;
+    }
+
+    .pinaf:hover .pinafdropdownlistV{
+        display: block;
+        color: white;
+        background-color:darkorange;
+    }
+
+    .pinafdropdownitem:hover{
+        cursor: default;
+        color: white;
+        border-right: 1px solid grey;
+        border-bottom: 1px solid grey;
+        background-color:black;
+    }
+
+    .pinafdropdownlistH{
+        display: none;
+        position: absolute;
+        z-index: 9999; 
+        left: 0px; /*var(--afdropdownleftpad);*/
+        width: calc(var(--afdropdownwidth) + 2 * var(--bodyBoardWidth));
+        border: 1px solid black;
+        transform: rotate(90deg);
+        transform-origin: calc(var(--pinHeight) / 2) calc(0px - var(--pinHeight) / 2);
+    }
+
+    .pinaf:hover .pinafdropdownlistH{
+        display: block;
+        color: white;
+        background-color:darkorange;
+    }
+
+    .pinafdropdownitem:hover{
+        cursor: default;
+        color: white;
+        border-right: 1px solid grey;
+        border-bottom: 1px solid grey;
+        background-color:black;
+    }
 </style>    
 
 <body>
@@ -339,7 +389,11 @@
 
             <div class="pinrect pinrectV leftpinafrect">
                 <ul class="pinrectstyle"> 
-                    <li class="pincell pinaf pinleftcell" :class="pintypeclass4af(item)" v-for="(item,index) in leftpins" :key="index">{{item.AFs === undefined ? '' : item.AFs[0].name}}</li>
+                    <li class="pincell pinaf pinleftcell" :class="pintypeclass4af(item)" v-for="(item,index) in leftpins" :key="index">{{item.AFs === undefined ? '' : item.AFs[0].name}}
+                        <ul class="pinrectstyle pinafdropdownlistV">
+                            <li class="pinafdropdownitem" v-for="(afitem,index1) in item.AFs" @click="test(afitem)">{{'AF' + afitem.idx + '[' + afitem.name + ']'}}</li>
+                        </ul>
+                    </li>
                 </ul>
             </div> 
 
@@ -358,7 +412,11 @@
 
             <div v-if="chipinfo.package === 1" class="pinrect pinrectV nroatte90 buttonpinafrect">
                 <ul class="pinrectstyle"> 
-                    <li class="pincell pinaf pinleftcell" :class="pintypeclass4af(item)" v-for="(item,index) in bottompins" :key="index">{{item.AFs === undefined ? '' : item.AFs[0].name}}</li>
+                    <li class="pincell pinaf pinleftcell" :class="pintypeclass4af(item)" v-for="(item,index) in bottompins" :key="index">{{item.AFs === undefined ? '' : item.AFs[0].name}}
+                        <ul class="pinrectstyle pinafdropdownlistH">
+                            <li class="pinafdropdownitem" v-for="(afitem,index1) in item.AFs" @click="test(afitem)">{{afitem.name}}</li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
 
@@ -377,7 +435,11 @@
 
             <div class="pinrect pinrectV rightpinafrect">
                 <ul class="pinrectstyle"> 
-                    <li class="pincell pinaf pinrightcell" :class="pintypeclass4af(item)" v-for="(item,index) in rightpins" :key="index">{{item.AFs === undefined ? '' : item.AFs[0].name}}</li>
+                    <li class="pincell pinaf pinrightcell" :class="pintypeclass4af(item)" v-for="(item,index) in rightpins" :key="index">{{item.AFs === undefined ? '' : item.AFs[0].name}}
+                        <ul class="pinrectstyle pinafdropdownlistV">
+                            <li class="pinafdropdownitem pinleftcell" v-for="(afitem,index1) in item.AFs" @click="test(afitem)">{{'AF' + afitem.idx + '[' + afitem.name + ']'}}</li>
+                        </ul>
+                    </li>
                 </ul>
             </div>  
 
@@ -396,7 +458,11 @@
 
             <div v-if="chipinfo.package === 1" class="pinrect pinrectV nroatte90 toppinafrect">
                 <ul class="pinrectstyle"> 
-                    <li class="pincell pinaf pinrightcell" :class="pintypeclass4af(item)" v-for="(item,index) in toppins" :key="index">{{item.AFs === undefined ? '' : item.AFs[0].name}}</li>
+                    <li class="pincell pinaf pinrightcell" :class="pintypeclass4af(item)" v-for="(item,index) in toppins" :key="index">{{item.AFs === undefined ? '' : item.AFs[0].name}}
+                        <ul class="pinrectstyle pinafdropdownlistH">
+                            <li class="pinafdropdownitem pinleftcell" v-for="(afitem,index1) in item.AFs" @click="test(afitem)">{{'AF' + afitem.idx + '[' + afitem.name + ']'}}</li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -460,7 +526,7 @@
                     ,{id: 23, name:'PA7', type: 1, AFs:[{idx: 0, name:"SPI1_MOSI"},{idx: 1, name:"TIM3_CH2"},{idx: 2, name:"TIM1_CH1N"},{idx: 3, name:"TIM1_CH3N"},{idx: 4, name:"TIM14_CH1"},{idx: 5, name:"TIM17_CH1"},{idx: 6, name:"TIM1_CH2N"},{idx: 7, name:"COMP2_OUT"}]}
                     ,{id: 24, name:'PC4', type: 1, AFs:[{idx: 3, name:"UART2_TX"},{idx: 5, name:"TIM3_CH1"},{idx: 6, name:"SPI1_MOSI"}]}
                     ,{id: 25, name:'PC5', type: 1, AFs:[{idx: 3, name:"UART2_RX"},{idx: 5, name:"TIM3_CH2"},{idx: 6, name:"SPI1_MISO"}]}
-                    ,{id: 26, name:'PB0', type: 1, AFs:[{idx: 1, name:"TIM3_CH3"},{idx: 2, name:"TIM1_CH2N"},{idx: 3, name:"TIM1_CH1N"},,{idx: 4, name:"TIM1_CH3"}]}
+                    ,{id: 26, name:'PB0', type: 1, AFs:[{idx: 1, name:"TIM3_CH3"},{idx: 2, name:"TIM1_CH2N"},{idx: 3, name:"TIM1_CH1N"},{idx: 4, name:"TIM1_CH3"}]}
                     ,{id: 27, name:'PB1', type: 1, AFs:[{idx: 0, name:"TIM14_CH1"},{idx: 1, name:"TIM3_CH4"},{idx: 2, name:"TIM1_CH3N"},{idx: 3, name:"TIM1_CH2N"},{idx: 4, name:"TIM2_CH3"},{idx: 5, name:"TIM1_CH2"},{idx: 6, name:"TIM1_CH1N"}]}
                     ,{id: 28, name:'PB2', type: 1}
                     ,{id: 29, name:'PB10',type: 1, AFs:[{idx: 1, name:"I2C1_SCL"},{idx: 2, name:"TIM2_CH3"},{idx: 5, name:"SPI2_SCK"}]}
@@ -737,7 +803,18 @@
                 document.body.style.setProperty('--sideCount', this.sidecount);
                 document.body.style.setProperty('--widthRate', this.widthrate);
                 this.showchip = true;
+            },
+            test(name){
+                alert("选择了===功能" + name.idx + '===' + name.name )
             }
+            // 此函数用来检测数据是否完整, AF里面多了一个”，“，导致我调试了一上午
+            // getAFdata(item, items, itemname){
+            //     if (item !== undefined){
+            //         return item.name;
+            //     }
+            //     console.log(itemname)
+            //     return 1;
+            // }
         }
     })
 </script>
