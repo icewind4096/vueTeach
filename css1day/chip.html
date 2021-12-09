@@ -317,11 +317,11 @@
             <input type="checkbox" v-model="chipinfo.displaylogomanu" id='dislogomanu'><label for="dislogomanu">显示logo-制造商</label><br/>
         </div>
         <!--  LQFP 主体 -->
-        <div v-if="showchip === true" class="chipbody" :style="chiplookstyle">
+        <div class="chipbody" :style="chiplookstyle">
             <!-- logo -->
-            <div v-if="(showchip === true) && (chipinfo.package === 1) && (chipinfo.displaylogoname === true)" class="chiplogoname">{{chipinfo.name}}</div>
-            <div v-if="(showchip === true) && (chipinfo.package === 1) && (chipinfo.displaylogoline === true)" class="chiplogonameunderline"></div>
-            <div v-if="(showchip === true) && (chipinfo.package === 1) && (chipinfo.displaylogomanu === true)" class="chiplogomanufacturer">{{chipinfo.manufacturer}}</div>
+            <div v-if="(chipinfo.package === 1) && (chipinfo.displaylogoname === true)" class="chiplogoname">{{chipinfo.name}}</div>
+            <div v-if="(chipinfo.package === 1) && (chipinfo.displaylogoline === true)" class="chiplogonameunderline"></div>
+            <div v-if="(chipinfo.package === 1) && (chipinfo.displaylogomanu === true)" class="chiplogomanufacturer">{{chipinfo.manufacturer}}</div>
 
             <!-- 左边pin脚 -->
             <div class="pinrect pinrectV leftpinnumbrect">
@@ -704,20 +704,15 @@
                 }
                 return this.class4pinaftype[0];
             },
-            rotateleft(){
-                if (this.rotateedge === 270){
-                    this.rotateedge = 0
-                } else {
-
-                }
-            },
             rotateright(value){
-                this.rotateedge = this.rotateedge + value;
+                this.rotateedge = (this.rotateedge + value) % 360 === 0 ? 0 : this.rotateedge + value;
                 this.chiplookstyle.transform = 'rotate(' + this.rotateedge + 'deg)'
+                console.log(this.rotateedge)
             },
             rotateleft(value){
-                this.rotateedge = this.rotateedge - value;
+                this.rotateedge = (this.rotateedge - value) % 360 === 0 ? 0 : this.rotateedge - value;
                 this.chiplookstyle.transform = 'rotate(' + this.rotateedge + 'deg)'
+                console.log(this.rotateedge)
             },
             changewidthrate(value){
                 document.body.style.setProperty('--pinCount', this.visualpincount);
@@ -734,10 +729,8 @@
             changepackage(event){
                 if (event.target.value != 'LQFP'){
                     this.chipinfo.package = 2;
-                    // this.chipinfo.chipbody = 'chipbodytssop'
                 } else {
                     this.chipinfo.package = 1;
-                    // this.chipinfo.chipbody = 'chipbodylqfp'
                 }
 
                 document.body.style.setProperty('--pinCount', this.visualpincount);
