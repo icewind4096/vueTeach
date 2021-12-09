@@ -47,18 +47,18 @@
         margin: 0px;
     }
 
-    .chipbodylqfp{
-        position: relative;
-        font-family: var(--bodyLogoFontName);
-        font-size: 12px;
-        margin: var(--bodyOffsetY) auto;
-        border: var(--bodyBoardWidth) solid var(--bodyBoardColor);
-        height: calc((var(--pinCount) / var(--sideCount)) * (var(--pinHeight) + var(--pin2pinOffset) + var(--bodyBoardWidth) * 2) - var(--pin2pinOffset) + 2 * var(--pin2Edge));
-        width: calc((var(--pinCount) / var(--sideCount)) * (var(--pinHeight) + var(--pin2pinOffset) + var(--bodyBoardWidth) * 2) - var(--pin2pinOffset) + 2 * var(--pin2Edge));
-        background: linear-gradient(to bottom right, black, grey, #909090 , #303030);
-        /* background: linear-gradient(150deg,white, black); */
-        /* transform: scale(1.5);              */
-        /* transform:rotate(45deg); */
+    .chipbody{
+            position: relative;
+            font-family: var(--bodyLogoFontName);
+            font-size: 12px;
+            margin: var(--bodyOffsetY) auto;
+            border: var(--bodyBoardWidth) solid var(--bodyBoardColor);
+            height: calc((var(--pinCount) / var(--sideCount)) * (var(--pinHeight) + var(--pin2pinOffset) + var(--bodyBoardWidth) * 2) - var(--pin2pinOffset) + 2 * var(--pin2Edge));
+            width: calc(var(--widthRate) * ((var(--pinCount) / var(--sideCount)) * (var(--pinHeight) + var(--pin2pinOffset) + var(--bodyBoardWidth) * 2) - var(--pin2pinOffset) + 2 * var(--pin2Edge)));
+            background: linear-gradient(to bottom right, black, grey, #909090 , #303030);
+            /* background: linear-gradient(150deg,white, black); */
+            /* transform: scale(1.5);              */
+            /* transform:rotate(45deg); */
     }
 
     .chiplogoname{
@@ -120,7 +120,7 @@
     }
 
     .bootpin{
-        background-color: blue;
+        background-color: white
     }
 
     .gpioa{
@@ -294,20 +294,6 @@
         text-align: center;
     }
 
-    /*=========== chipbodytssop =========================================*/
-    .chipbodytssop{
-            position: relative;
-            font-family: var(--bodyLogoFontName);
-            font-size: 12px;
-            margin: var(--bodyOffsetY) auto;
-            border: var(--bodyBoardWidth) solid var(--bodyBoardColor);
-            height: calc((var(--pinCount) / var(--sideCount)) * (var(--pinHeight) + var(--pin2pinOffset) + var(--bodyBoardWidth) * 2) - var(--pin2pinOffset) + 2 * var(--pin2Edge));
-            width: calc(var(--widthRate) * ((var(--pinCount) / var(--sideCount)) * (var(--pinHeight) + var(--pin2pinOffset) + var(--bodyBoardWidth) * 2) - var(--pin2pinOffset) + 2 * var(--pin2Edge)));
-            background: linear-gradient(to bottom right, black, grey, #909090 , #303030);
-            /* background: linear-gradient(150deg,white, black); */
-            /* transform: scale(1.5);              */
-            /* transform:rotate(45deg); */
-    }
 </style>    
 
 <body>
@@ -317,7 +303,7 @@
             <span class="iconfont icon-xiangzuoxuanzhuan" style="font-weight: 400; font-size:32px;" @click="rotateleft(90)"></span>
             <span class="iconfont icon-xiangyouxuanzhuan" style="font-weight: 400; font-size:32px;" @click="rotateright(90)"></span>
 
-            <label>pin脚数量</label><input type="text" @input="redrawchip"><br/>
+            <label>pin脚数量</label><input type="text" v-model="chipinfo.pincount" @input="redrawchip"><br/>
             
             <label>长宽比，只在tssop下有效</label><input type="text" @input="changewidthrate" v-bind:disabled="chipinfo.package != 2"><br/>
 
@@ -331,7 +317,7 @@
             <input type="checkbox" v-model="chipinfo.displaylogomanu" id='dislogomanu'><label for="dislogomanu">显示logo-制造商</label><br/>
         </div>
         <!--  LQFP 主体 -->
-        <div v-if="showchip === true" :class="chipinfo.chipbody" :style="chiplookstyle">
+        <div v-if="showchip === true" class="chipbody" :style="chiplookstyle">
             <!-- logo -->
             <div v-if="(showchip === true) && (chipinfo.package === 1) && (chipinfo.displaylogoname === true)" class="chiplogoname">{{chipinfo.name}}</div>
             <div v-if="(showchip === true) && (chipinfo.package === 1) && (chipinfo.displaylogoline === true)" class="chiplogonameunderline"></div>
@@ -432,11 +418,9 @@
 
                 pincount: 64,
                 package: 1, //type: 0-reserve 1-lqfp 2-tssop 3 qfn 4 bga
-                chipbody: 'chipbodylqfp',
 
                 // pincount: 20,
                 // package: 2, //type: 0-reserve 1-lqfp 2-tssop 3 qfn 4 bga
-                // chipbody: 'chipbodytssop',
 
                 // pinassign:[
                 //     {count: 2,  aligment: 0},
@@ -701,6 +685,7 @@
         created() {
         },
         mounted() {
+            this.redrawchip();
         },
         // ^P[ABCDEFGH]\d+$
         methods: {
@@ -740,8 +725,7 @@
                 document.body.style.setProperty('--widthRate', event.target.value);
                 this.showchip = true;
             },
-            redrawchip(event){
-                this.chipinfo.pincount = event.target.value;
+            redrawchip(){
                 document.body.style.setProperty('--pinCount', this.visualpincount);
                 document.body.style.setProperty('--sideCount', this.sidecount);
                 document.body.style.setProperty('--widthRate', this.widthrate);
@@ -750,10 +734,10 @@
             changepackage(event){
                 if (event.target.value != 'LQFP'){
                     this.chipinfo.package = 2;
-                    this.chipinfo.chipbody = 'chipbodytssop'
+                    // this.chipinfo.chipbody = 'chipbodytssop'
                 } else {
                     this.chipinfo.package = 1;
-                    this.chipinfo.chipbody = 'chipbodylqfp'
+                    // this.chipinfo.chipbody = 'chipbodylqfp'
                 }
 
                 document.body.style.setProperty('--pinCount', this.visualpincount);
