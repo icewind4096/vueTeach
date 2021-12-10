@@ -312,6 +312,18 @@
         background-color:darkorange;
     }
 
+    .pinafname{
+        height: var(--pinHeight);
+    }
+
+    .pinafnameemptycolor{
+        background-color: gray;
+    }
+
+    .pinafnamenoemptycolor{
+        background-color: goldenrod;
+    }
+
     .pinafdropdownitem:hover{
         cursor: default;
         color: white;
@@ -389,9 +401,14 @@
 
             <div class="pinrect pinrectV leftpinafrect">
                 <ul class="pinrectstyle"> 
-                    <li class="pincell pinaf pinleftcell" :class="pintypeclass4af(item)" v-for="(item,index) in leftpins" :key="index">{{item.AFs === undefined ? '' : item.AFs[0].name}}
+                    <!-- <li class="pincell pinaf pinleftcell" :class="pintypeclass4af(item)" v-for="(item,index) in leftpins" :key="index">{{item.AFs === undefined ? '' : item.AFs[0].name}} -->
+                    <!-- <li class="pincell pinaf pinleftcell" :class="pintypeclass4af(item)" v-for="(item,index) in leftpins" :key="index"><span>{{item.AFs === undefined ? '' : item.AFs[0].name}}</span> -->
+                    <li class="pincell pinaf pinleftcell" :class="pintypeclass4af(item)" v-for="(item,index) in leftpins" :key="index">
+                        <div class="pinafname">
+                            <span>{{chipinfo.selectafs[item.id - 1].name}}</span>
+                        </div>
                         <ul class="pinrectstyle pinafdropdownlistV">
-                            <li class="pinafdropdownitem" v-for="(afitem,index1) in item.AFs" @click="test(afitem)">{{'AF' + afitem.idx + '[' + afitem.name + ']'}}</li>
+                            <li class="pinafdropdownitem" v-for="(afitem,index1) in item.AFs" @click="afdropdownclick(item.id, afitem)">{{'AF' + afitem.idx + '[' + afitem.name + ']'}}</li>
                         </ul>
                     </li>
                 </ul>
@@ -412,9 +429,12 @@
 
             <div v-if="chipinfo.package === 1" class="pinrect pinrectV nroatte90 buttonpinafrect">
                 <ul class="pinrectstyle"> 
-                    <li class="pincell pinaf pinleftcell" :class="pintypeclass4af(item)" v-for="(item,index) in bottompins" :key="index">{{item.AFs === undefined ? '' : item.AFs[0].name}}
+                    <li class="pincell pinaf pinleftcell" :class="pintypeclass4af(item)" v-for="(item,index) in bottompins" :key="index">
+                        <div class="pinafname">
+                            <span>{{chipinfo.selectafs[item.id - 1].name}}</span>
+                        </div>
                         <ul class="pinrectstyle pinafdropdownlistH">
-                            <li class="pinafdropdownitem" v-for="(afitem,index1) in item.AFs" @click="test(afitem)">{{afitem.name}}</li>
+                            <li class="pinafdropdownitem" v-for="(afitem,index1) in item.AFs" @click="afdropdownclick(item.id, afitem)">{{afitem.name}}</li>
                         </ul>
                     </li>
                 </ul>
@@ -435,9 +455,12 @@
 
             <div class="pinrect pinrectV rightpinafrect">
                 <ul class="pinrectstyle"> 
-                    <li class="pincell pinaf pinrightcell" :class="pintypeclass4af(item)" v-for="(item,index) in rightpins" :key="index">{{item.AFs === undefined ? '' : item.AFs[0].name}}
+                    <li class="pincell pinaf pinrightcell" :class="pintypeclass4af(item)" v-for="(item,index) in rightpins" :key="index">
+                        <div class="pinafname">
+                            <span>{{chipinfo.selectafs[item.id - 1].name}}</span>
+                        </div>
                         <ul class="pinrectstyle pinafdropdownlistV">
-                            <li class="pinafdropdownitem pinleftcell" v-for="(afitem,index1) in item.AFs" @click="test(afitem)">{{'AF' + afitem.idx + '[' + afitem.name + ']'}}</li>
+                            <li class="pinafdropdownitem pinleftcell" v-for="(afitem,index1) in item.AFs" @click="afdropdownclick(item.id, afitem)">{{afitem.name}}</li>
                         </ul>
                     </li>
                 </ul>
@@ -457,10 +480,13 @@
             </div>
 
             <div v-if="chipinfo.package === 1" class="pinrect pinrectV nroatte90 toppinafrect">
-                <ul class="pinrectstyle"> 
-                    <li class="pincell pinaf pinrightcell" :class="pintypeclass4af(item)" v-for="(item,index) in toppins" :key="index">{{item.AFs === undefined ? '' : item.AFs[0].name}}
+                <ul class="pinrectstyle">                                                                                                       
+                    <li class="pincell pinaf pinrightcell" :class="pintypeclass4af(item)" v-for="(item,index) in toppins" :key="index">
+                        <div class="pinafname">
+                            <span>{{chipinfo.selectafs[item.id - 1].name}}</span>
+                        </div>
                         <ul class="pinrectstyle pinafdropdownlistH">
-                            <li class="pinafdropdownitem pinleftcell" v-for="(afitem,index1) in item.AFs" @click="test(afitem)">{{'AF' + afitem.idx + '[' + afitem.name + ']'}}</li>
+                            <li class="pinafdropdownitem pinleftcell" v-for="(afitem,index1) in item.AFs" @click="afdropdownclick(item.id, afitem)">{{'AF' + afitem.idx + '[' + afitem.name + ']'}}</li>
                         </ul>
                     </li>
                 </ul>
@@ -498,8 +524,8 @@
                 displaylogoname: true,
                 displaylogoline: true,
                 displaylogomanu: true,
-
-
+                selectafs:[
+                ],
                 pins:[
                      {id: 1,  name:'PD7', type: 1, AFs:[{idx: 5, name:"TIM3_CH1"},{idx: 6, name:"TIM17_CH1"}]}
                     ,{id: 2,  name:'PC13',type: 1, AFs:[{idx: 6, name:"TIM2_CHR"}]}
@@ -682,6 +708,7 @@
             bottompins:{
                 get(){
                     let pininfos = [];
+
                     if (this.sidecount === 4){
                         pininfos = this.pins.slice(this.leftpinendindex, this.bottompinendindex);
                     }
@@ -719,9 +746,10 @@
                     else {
                         pininfos = this.pins.slice(this.bottompinendindex, this.rightpinendindex).reverse()
                     } 
-                    if ((this.sidecount === 4 && this.chipinfo.pinassign != undefined && this.chipinfo.pinassign[2].aligment != undefined && this.chipinfo.pinassign[2].aligment === 0) 
-                    || ((this.sidecount === 2 && this.chipinfo.pinassign != undefined && this.chipinfo.pinassign[1].aligment != undefined && this.chipinfo.pinassign[1].aligment === 0) 
-                    || (this.chipinfo.pinassign === undefined && this.pinaligment === 0))){
+
+                    if ((this.sidecount === 4 && this.chipinfo.pinassign != undefined && this.chipinfo.pinassign[2].aligment != undefined && this.chipinfo.pinassign[2].aligment === 1) 
+                    || (this.sidecount === 2 && this.chipinfo.pinassign != undefined && this.chipinfo.pinassign[1].aligment != undefined && this.chipinfo.pinassign[1].aligment === 1) 
+                    || (this.chipinfo.pinassign === undefined && this.pinaligment === 1)){
                         while (pininfos.length < this.visualsidepincount){
                             pininfos.unshift({})
                         }
@@ -738,8 +766,8 @@
             toppins:{
                 get(){
                     let pininfos = this.pins.slice(this.rightpinendindex, this.toppinendindex).reverse();
-                    if ((this.sidecount === 4 && this.chipinfo.pinassign != undefined && this.chipinfo.pinassign[3].aligment != undefined && this.chipinfo.pinassign[3].aligment === 0) 
-                    || (this.chipinfo.pinassign === undefined && this.pinaligment === 0)){
+                    if ((this.sidecount === 4 && this.chipinfo.pinassign != undefined && this.chipinfo.pinassign[3].aligment != undefined && this.chipinfo.pinassign[3].aligment === 1) 
+                    || (this.chipinfo.pinassign === undefined && this.pinaligment === 1)){
                         while (pininfos.length < this.visualsidepincount){
                             pininfos.unshift({})
                         }
@@ -748,6 +776,17 @@
                 }
             },
         },
+        watch:{
+            'pincount':{
+                immediate: true,
+                handler(newvalue, oldvalue){
+                    this.chipinfo.selectafs.length = 0
+                    for (var i = 0; i < newvalue; i ++){
+                        this.chipinfo.selectafs.push({name: '' })
+                    }
+                }
+            }
+        },
         created() {
         },
         mounted() {
@@ -755,30 +794,41 @@
         },
         // ^P[ABCDEFGH]\d+$
         methods: {
-            pintypeclass4name(value){
-                if (value.id === undefined){
+            pintypeclass4name(item){
+                if (item.id === undefined){
                     return 'unvisiable'; 
                 }
-                if (value.type === 1){
-                    return this.class4pintype[value.type] + value.name.substring(1, 2).toLowerCase();
+
+                if (item.type === 1){
+                    return this.class4pintype[item.type] + item.name.substring(1, 2).toLowerCase();
                 } 
-                return this.class4pintype[value.type];
+
+                return this.class4pintype[item.type];
             },
-            pintypeclass4af(value){
-                if ((value.type != 1) || (value.type === 1 && value.AFs === undefined)){
+            pintypeclass4af(item){
+                if ((item.type != 1) || (item.type === 1 && item.AFs === undefined)){
                     return this.class4pinaftype[1]
                 }
-                return this.class4pinaftype[0];
+
+                var styles = [];
+
+                styles.push(this.class4pinaftype[0]);
+
+                if (this.chipinfo.selectafs[item.id - 1].name.length === 0){
+                    styles.push('pinafnameemptycolor');
+                } else {
+                    styles.push('pinafnamenoemptycolor');
+                }
+
+                return styles;
             },
             rotateright(value){
                 this.rotateedge = (this.rotateedge + value) % 360 === 0 ? 0 : this.rotateedge + value;
                 this.chiplookstyle.transform = 'rotate(' + this.rotateedge + 'deg)'
-                console.log(this.rotateedge)
             },
             rotateleft(value){
                 this.rotateedge = (this.rotateedge - value) % 360 === 0 ? 0 : this.rotateedge - value;
                 this.chiplookstyle.transform = 'rotate(' + this.rotateedge + 'deg)'
-                console.log(this.rotateedge)
             },
             changewidthrate(value){
                 document.body.style.setProperty('--pinCount', this.visualpincount);
@@ -804,8 +854,8 @@
                 document.body.style.setProperty('--widthRate', this.widthrate);
                 this.showchip = true;
             },
-            test(name){
-                alert("选择了===功能" + name.idx + '===' + name.name )
+            afdropdownclick(id, item){
+                this.chipinfo.selectafs[id - 1].name = item.name;
             }
             // 此函数用来检测数据是否完整, AF里面多了一个”，“，导致我调试了一上午
             // getAFdata(item, items, itemname){
