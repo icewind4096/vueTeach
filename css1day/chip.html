@@ -37,7 +37,7 @@
         --logoChipManu2LeftEdge: 80px;
         --logoChipManu2TopEdge: 238px;
         --logoChipManuFontSize: 32px;
-        --logoChipManuFontName: Arial, Helvetica, sans-serif; 
+        --logoChipManuFontName: Arial, Helvetica, sans-serif;
 
         --pinLeftPad: 2px;
         --afdropdownleftpad: 20px;          /*用于给af功能的dropdown留出边距，要不af的list太长，会遮盖到一个af功能*/
@@ -50,23 +50,23 @@
     }
 
     .chipbody{
-            position: relative;
-            font-family: var(--bodyLogoFontName);
-            font-size: 12px;
-            margin: var(--bodyOffsetY) auto;
-            border: var(--bodyBoardWidth) solid var(--bodyBoardColor);
-            height: calc((var(--pinCount) / var(--sideCount)) * (var(--pinHeight) + var(--pin2pinOffset) + var(--bodyBoardWidth) * 2) - var(--pin2pinOffset) + 2 * var(--pin2Edge));
-            width: calc(var(--widthRate) * ((var(--pinCount) / var(--sideCount)) * (var(--pinHeight) + var(--pin2pinOffset) + var(--bodyBoardWidth) * 2) - var(--pin2pinOffset) + 2 * var(--pin2Edge)));
-            background: linear-gradient(to bottom right, black, grey, #909090 , #303030);
-            /* background: linear-gradient(150deg,white, black); */
-            /* transform: scale(1.5);              */
-            /* transform:rotate(45deg); */
+        position: relative;
+        font-family: var(--bodyLogoFontName);
+        font-size: 12px;
+        margin: var(--bodyOffsetY) auto;
+        border: var(--bodyBoardWidth) solid var(--bodyBoardColor);
+        height: calc((var(--pinCount) / var(--sideCount)) * (var(--pinHeight) + var(--pin2pinOffset) + var(--bodyBoardWidth) * 2) - var(--pin2pinOffset) + 2 * var(--pin2Edge));
+        width: calc(var(--widthRate) * ((var(--pinCount) / var(--sideCount)) * (var(--pinHeight) + var(--pin2pinOffset) + var(--bodyBoardWidth) * 2) - var(--pin2pinOffset) + 2 * var(--pin2Edge)));
+        background: linear-gradient(to bottom right, black, grey, #909090 , #303030);
+        /* background: linear-gradient(150deg,white, black); */
+        /* transform: scale(1.5);              */
+        /* transform:rotate(45deg); */
     }
 
     .chiplogoname{
         position:absolute;
-        left: var(--logoChipName2LeftEdge); 
-        top: var(--logoChipName2TopEdge); 
+        left: var(--logoChipName2LeftEdge);
+        top: var(--logoChipName2TopEdge);
         font-family: var(--logoChipNameFontName);
         font-size: var(--logoChipNameFontSize);
     }
@@ -75,34 +75,34 @@
         position:absolute;
         background-color: var(--logoChipNameUnderLineColor);
         left: var(--logoChipName2LeftEdge);
-        top: calc(var(--logoChipName2TopEdge) + var(--logoChipNameFontSize)); 
+        top: calc(var(--logoChipName2TopEdge) + var(--logoChipNameFontSize));
         height: var(--logoChipNameUnderLineHeight);
         width: var(--logoChipNameUnderLineWidth);
     }
 
     .chiplogomanufacturer{
-        position: absolute; 
+        position: absolute;
         left: var(--logoChipManu2LeftEdge);
-        top: calc(var(--logoChipName2TopEdge) + var(--logoChipNameFontSize) + var(--logoChipNameUnderLineHeight)); 
+        top: calc(var(--logoChipName2TopEdge) + var(--logoChipNameFontSize) + var(--logoChipNameUnderLineHeight));
         font-family: var(--logoChipManuFontName);
         font-size: var(--logoChipManuFontSize);
         background: linear-gradient(215deg,blue, gold);
         -webkit-text-fill-color:transparent;
-        -webkit-background-clip: text;            
+        -webkit-background-clip: text;
         background-clip: text;
     }
 
     .unvisiable{
         visibility: hidden;
-     }
+    }
 
-     .vddpin{
-        background-color: red; 
+    .vddpin{
+        background-color: red;
     }
 
     .vsspin{
         color: white !important;
-        background-color: black; 
+        background-color: black;
     }
 
     .vddapin{
@@ -122,35 +122,35 @@
     }
 
     .gpioa{
-        background-color:rgba(216, 92, 87, 0.4); 
+        background-color:rgba(216, 92, 87, 0.4);
     }
 
     .gpiob{
-        background-color:rgba(84, 56, 245, 0.4); 
+        background-color:rgba(84, 56, 245, 0.4);
     }
 
     .gpioc{
-        background-color:rgba(100, 17, 107, 0.4); 
+        background-color:rgba(100, 17, 107, 0.4);
     }
 
     .gpiod{
-        background-color:rgba(217, 243, 158, 0.4); 
+        background-color:rgba(217, 243, 158, 0.4);
     }
 
     .gpioe{
-        background-color:rgba(235, 41, 50, 0.4); 
+        background-color:rgba(235, 41, 50, 0.4);
     }
 
     .gpiof{
-        background-color:rgba(240, 83, 21, 0.4); 
+        background-color:rgba(240, 83, 21, 0.4);
     }
 
     .gpiog{
-        background-color:rgba(139, 163, 155, 0.4); 
+        background-color:rgba(139, 163, 155, 0.4);
     }
 
     .gpioh{
-        background-color:rgba(207, 21, 161, 0.4); 
+        background-color:rgba(207, 21, 161, 0.4);
     }
 
     .roatte90{
@@ -165,7 +165,7 @@
     .pinrect{
         position: absolute;
         height: calc((var(--pinCount) / var(--sideCount)) * (var(--pinHeight) + var(--pin2pinOffset) + var(--bodyBoardWidth) * 2) - var(--pin2pinOffset));
-        width: calc(var(--pinWidth) + 4 * var(--bodyBoardWidth));     
+        width: calc(var(--pinWidth) + 4 * var(--bodyBoardWidth));
     }
 
     .pinrectV{
@@ -174,36 +174,36 @@
 
     .pinrectstyle{
         list-style: none;
-     }
+    }
 
-     .leftpinnumbrect{
-         left: 0px;
-         width: var(--pinnumwidth)
-     }
+    .leftpinnumbrect{
+        left: 0px;
+        width: var(--pinnumwidth)
+    }
 
-     .rightpinnumbrect{
-         /* left: calc((var(--pinCount) / var(--sideCount)) * (var(--pinHeight) + var(--pin2pinOffset) + var(--bodyBoardWidth) * 2) - var(--pin2pinOffset) + 2 * var(--pin2Edge) - var(--pinnumwidth)); */
-         left: calc((var(--widthRate) * ((var(--pinCount) / var(--sideCount)) * (var(--pinHeight) + var(--pin2pinOffset) + var(--bodyBoardWidth) * 2) - var(--pin2pinOffset) + 2 * var(--pin2Edge))) - var(--pinnumwidth));
-         width: var(--pinnumwidth);
-     }
+    .rightpinnumbrect{
+        /* left: calc((var(--pinCount) / var(--sideCount)) * (var(--pinHeight) + var(--pin2pinOffset) + var(--bodyBoardWidth) * 2) - var(--pin2pinOffset) + 2 * var(--pin2Edge) - var(--pinnumwidth)); */
+        left: calc((var(--widthRate) * ((var(--pinCount) / var(--sideCount)) * (var(--pinHeight) + var(--pin2pinOffset) + var(--bodyBoardWidth) * 2) - var(--pin2pinOffset) + 2 * var(--pin2Edge))) - var(--pinnumwidth));
+        width: var(--pinnumwidth);
+    }
 
-     .buttonpinnumbrect{
+    .buttonpinnumbrect{
         left: var(--pin2Edge);
         width: var(--pinnumwidth);
         top: calc((var(--pinCount) / var(--sideCount)) * (var(--pinHeight) + var(--pin2pinOffset) + var(--bodyBoardWidth) * 2) - var(--pin2pinOffset) + 2 * var(--pin2Edge));
-     }
+    }
 
-     .toppinnumbrect{
+    .toppinnumbrect{
         left: var(--pin2Edge);
         top: var(--pinnumwidth);
         width: var(--pinnumwidth);
-     }
+    }
 
-     .leftpinnamerect{
+    .leftpinnamerect{
         left: calc(0px - 4 * var(--bodyBoardWidth) - var(--pinWidth));
-     }
+    }
 
-     .rightnamerect{
+    .rightnamerect{
         /* left: calc((var(--pinCount) / var(--sideCount)) * (var(--pinHeight) + var(--pin2pinOffset) + var(--bodyBoardWidth) * 2) - var(--pin2pinOffset) + 2 * var(--pin2Edge)); */
         left: calc(var(--widthRate) * ((var(--pinCount) / var(--sideCount)) * (var(--pinHeight) + var(--pin2pinOffset) + var(--bodyBoardWidth) * 2) - var(--pin2pinOffset) + 2 * var(--pin2Edge)));
     }
@@ -218,39 +218,39 @@
         top: 0px;
     }
 
-     .leftpinafrect{
+    .leftpinafrect{
         left: calc(0px - 4 * var(--bodyBoardWidth) - 2 * var(--pinWidth) - var(--func2funcOffset));
-     }
+    }
 
-     .rightpinafrect{
+    .rightpinafrect{
         /* left: calc((((var(--pinCount) / var(--sideCount)) * (var(--pinHeight) + var(--pin2pinOffset) + var(--bodyBoardWidth) * 2) - var(--pin2pinOffset) + 2 * var(--pin2Edge)) + var(--pinWidth) + 4 * var(--bodyBoardWidth) + var(--func2funcOffset))); */
         left: calc((var(--widthRate) * ((var(--pinCount) / var(--sideCount)) * (var(--pinHeight) + var(--pin2pinOffset) + var(--bodyBoardWidth) * 2) - var(--pin2pinOffset) + 2 * var(--pin2Edge))) + var(--pinWidth) + 4 * var(--bodyBoardWidth) + var(--func2funcOffset));
-     }
+    }
 
-     .buttonpinafrect{
+    .buttonpinafrect{
         left: var(--pin2Edge);
         top: calc((var(--pinCount) / var(--sideCount)) * (var(--pinHeight) + var(--pin2pinOffset) + var(--bodyBoardWidth) * 2) - var(--pin2pinOffset) + 2 * var(--pin2Edge) + var(--pinWidth) + 4 * var(--bodyBoardWidth) + 1px + var(--pinWidth) + var(--func2funcOffset));
-     }
+    }
 
-     .toppinafrect{
+    .toppinafrect{
         left: var(--pin2Edge);
         top: calc(0px - (var(--pin2Edge) + var(--pinWidth) + var(--func2funcOffset)));
-     }
+    }
 
-     .pincell{
+    .pincell{
         border: 1px solid black;
         color: black;
-     }
+    }
 
-     .pinnumcell{
+    .pinnumcell{
         height: var(--pinHeight);
         line-height: var(--pinHeight);
         margin-bottom: var(--pin2pinOffset);
         border: 1px solid rgba(0, 0, 0, 0);     /*不想重新计算位置，还是画边框，但是边框全透明*/
         color: white;
-     }
+    }
 
-     .pinname{
+    .pinname{
         width: var(--pinWidth);
         height: var(--pinHeight);
         line-height: var(--pinHeight);
@@ -295,7 +295,7 @@
     .pinafdropdownlistV{
         display: none;
         position: absolute;
-        z-index: 9999; 
+        z-index: 9999;
         left: var(--afdropdownleftpad);
         width: calc(var(--afdropdownwidth) + 2 * var(--bodyBoardWidth));
         border: 1px solid black;
@@ -335,7 +335,7 @@
     .pinafdropdownlistH{
         display: none;
         position: absolute;
-        z-index: 9999; 
+        z-index: 9999;
         left: 0px; /*var(--afdropdownleftpad);*/
         width: calc(var(--afdropdownwidth) + 2 * var(--bodyBoardWidth));
         border: 1px solid black;
@@ -356,143 +356,142 @@
         border-bottom: 1px solid grey;
         background-color:black;
     }
-</style>    
+</style>
 
 <body>
-    <div id="root">
-        <!-- 旋转 -->
-        <div style="position: fixed; top:50px; right:50px;">
-            <span class="iconfont icon-xiangzuoxuanzhuan" style="font-weight: 400; font-size:32px;" @click="rotateleft(90)"></span>
-            <span class="iconfont icon-xiangyouxuanzhuan" style="font-weight: 400; font-size:32px;" @click="rotateright(90)"></span>
+<div id="root">
+    <!-- 旋转 -->
+    <div style="position: fixed; top:50px; right:50px;">
+        <span class="iconfont icon-xiangzuoxuanzhuan" style="font-weight: 400; font-size:32px;" @click="rotateleft(90)"></span>
+        <span class="iconfont icon-xiangyouxuanzhuan" style="font-weight: 400; font-size:32px;" @click="rotateright(90)"></span>
 
-            <label>pin脚数量</label><input type="text" v-model="chipinfo.pincount" @input="redrawchip"><br/>
-            
-            <label>长宽比，只在tssop下有效</label><input type="text" @input="changewidthrate" v-bind:disabled="chipinfo.package != 2"><br/>
+        <label>pin脚数量</label><input type="text" v-model="chipinfo.pincount" @input="redrawchip"><br/>
 
-            <label>封装样式</label>
-            <select id="packagename" @change="changepackage">
-                <option>LQFP</option>
-                <option>TSSOP</option>
-            </select><br/>
-            <input type="checkbox" v-model="chipinfo.displaylogoname" id='dislogoname'><label for="dislogoname">显示logo-产品名称</label><br/>
-            <input type="checkbox" v-model="chipinfo.displaylogoline" id='dislogoline'><label for="dislogoline">显示logo-横线</label><br/>
-            <input type="checkbox" v-model="chipinfo.displaylogomanu" id='dislogomanu'><label for="dislogomanu">显示logo-制造商</label><br/>
+        <label>长宽比，只在tssop下有效</label><input type="text" @input="changewidthrate" v-bind:disabled="chipinfo.package != 2"><br/>
+
+        <label>封装样式</label>
+        <select id="packagename" @change="changepackage">
+            <option>LQFP</option>
+            <option>TSSOP</option>
+        </select><br/>
+        <input type="checkbox" v-model="chipinfo.displaylogoname" id='dislogoname'><label for="dislogoname">显示logo-产品名称</label><br/>
+        <input type="checkbox" v-model="chipinfo.displaylogoline" id='dislogoline'><label for="dislogoline">显示logo-横线</label><br/>
+        <input type="checkbox" v-model="chipinfo.displaylogomanu" id='dislogomanu'><label for="dislogomanu">显示logo-制造商</label><br/>
+        <button @click="savedata">保存设置</button>
+    </div>
+    <!--  LQFP 主体 -->
+    <div class="chipbody" :style="chiplookstyle">
+        <!-- logo -->
+        <div v-if="(chipinfo.package === 1) && (chipinfo.displaylogoname === true)" class="chiplogoname">{{chipinfo.name}}</div>
+        <div v-if="(chipinfo.package === 1) && (chipinfo.displaylogoline === true)" class="chiplogonameunderline"></div>
+        <div v-if="(chipinfo.package === 1) && (chipinfo.displaylogomanu === true)" class="chiplogomanufacturer">{{chipinfo.manufacturer}}</div>
+
+        <!-- 左边pin脚 -->
+        <div class="pinrect pinrectV leftpinnumbrect">
+            <ul class="pinrectstyle">
+                <li class="pinleftcell pinnumcell" v-for="(item,index) in leftpins" :key="index">{{item.id}}</li>
+            </ul>
         </div>
-        <!--  LQFP 主体 -->
-        <div class="chipbody" :style="chiplookstyle">
-            <!-- logo -->
-            <div v-if="(chipinfo.package === 1) && (chipinfo.displaylogoname === true)" class="chiplogoname">{{chipinfo.name}}</div>
-            <div v-if="(chipinfo.package === 1) && (chipinfo.displaylogoline === true)" class="chiplogonameunderline"></div>
-            <div v-if="(chipinfo.package === 1) && (chipinfo.displaylogomanu === true)" class="chiplogomanufacturer">{{chipinfo.manufacturer}}</div>
 
-            <!-- 左边pin脚 -->
-            <div class="pinrect pinrectV leftpinnumbrect">
-                <ul class="pinrectstyle"> 
-                    <li class="pinleftcell pinnumcell" v-for="(item,index) in leftpins" :key="index">{{item.id}}</li>
-                </ul>
-            </div>
-            
-            <div class="pinrect pinrectV leftpinnamerect">
-                <ul class="pinrectstyle"> 
-                    <li class="pincell pinname pinleftcell" :class="pintypeclass4name(item)" v-for="(item,index) in leftpins" :key="index">{{item.name}}</li>
-                    <!-- <li class="pincell pinname pincentercell" :class="pintypeclass4name(item)" v-for="(item,index) in leftpins" :key="index">{{item.name}}</li> -->
-                </ul>
-            </div>
+        <div class="pinrect pinrectV leftpinnamerect">
+            <ul class="pinrectstyle">
+                <li class="pincell pinname pinleftcell" :class="pintypeclass4name(item)" v-for="(item,index) in leftpins" :key="index">{{item.name}}</li>
+                <!-- <li class="pincell pinname pincentercell" :class="pintypeclass4name(item)" v-for="(item,index) in leftpins" :key="index">{{item.name}}</li> -->
+            </ul>
+        </div>
 
-            <div class="pinrect pinrectV leftpinafrect">
-                <ul class="pinrectstyle"> 
-                    <!-- <li class="pincell pinaf pinleftcell" :class="pintypeclass4af(item)" v-for="(item,index) in leftpins" :key="index">{{item.AFs === undefined ? '' : item.AFs[0].name}} -->
-                    <!-- <li class="pincell pinaf pinleftcell" :class="pintypeclass4af(item)" v-for="(item,index) in leftpins" :key="index"><span>{{item.AFs === undefined ? '' : item.AFs[0].name}}</span> -->
-                    <li class="pincell pinaf pinleftcell" :class="pintypeclass4af(item)" v-for="(item,index) in leftpins" :key="index">
-                        <div class="pinafname">
-                            <span>{{chipinfo.selectafs[item.id - 1].name}}</span>
-                        </div>
-                        <ul class="pinrectstyle pinafdropdownlistV">
-                            <li class="pinafdropdownitem" v-for="(afitem,index1) in item.AFs" @click="afdropdownclick(item.id, afitem)">{{'AF' + afitem.idx + '[' + afitem.name + ']'}}</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div> 
+        <div class="pinrect pinrectV leftpinafrect">
+            <ul class="pinrectstyle">
+                <li class="pincell pinaf pinleftcell" :class="pintypeclass4af(item)" v-for="(item,index) in leftpins" :key="index">
+                    <div class="pinafname">
+                        <span>{{chipinfo.selectafs[item.id - 1].name}}</span>
+                    </div>
+                    <ul class="pinrectstyle pinafdropdownlistV">
+                        <li class="pinafdropdownitem" v-for="(afitem,index1) in item.AFs" @click="afdropdownclick(item.id, afitem)">{{'AF' + afitem.idx + '[' + afitem.name + ']'}}</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
 
-            <!-- 底部pin脚 -->
-            <div v-if="chipinfo.package === 1" class="pinrect pinrectV nroatte90 buttonpinnumbrect ">
-                <ul class="pinrectstyle"> 
-                    <li class="pinrightcell pinnumcell" v-for="(item,index) in bottompins" :key="index">{{item.id}}</li>
-                </ul>
-            </div>
+        <!-- 底部pin脚 -->
+        <div v-if="chipinfo.package === 1" class="pinrect pinrectV nroatte90 buttonpinnumbrect ">
+            <ul class="pinrectstyle">
+                <li class="pinrightcell pinnumcell" v-for="(item,index) in bottompins" :key="index">{{item.id}}</li>
+            </ul>
+        </div>
 
-            <div v-if="chipinfo.package === 1" class="pinrect pinrectV nroatte90 buttonnamerect">
-                <ul class="pinrectstyle"> 
-                    <li class="pincell pinname pinleftcell" :class="pintypeclass4name(item)" v-for="(item,index) in bottompins" :key="index">{{item.name}}&nbsp;</li>
-                </ul>
-            </div>
+        <div v-if="chipinfo.package === 1" class="pinrect pinrectV nroatte90 buttonnamerect">
+            <ul class="pinrectstyle">
+                <li class="pincell pinname pinleftcell" :class="pintypeclass4name(item)" v-for="(item,index) in bottompins" :key="index">{{item.name}}&nbsp;</li>
+            </ul>
+        </div>
 
-            <div v-if="chipinfo.package === 1" class="pinrect pinrectV nroatte90 buttonpinafrect">
-                <ul class="pinrectstyle"> 
-                    <li class="pincell pinaf pinleftcell" :class="pintypeclass4af(item)" v-for="(item,index) in bottompins" :key="index">
-                        <div class="pinafname">
-                            <span>{{chipinfo.selectafs[item.id - 1].name}}</span>
-                        </div>
-                        <ul class="pinrectstyle pinafdropdownlistH">
-                            <li class="pinafdropdownitem" v-for="(afitem,index1) in item.AFs" @click="afdropdownclick(item.id, afitem)">{{afitem.name}}</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+        <div v-if="chipinfo.package === 1" class="pinrect pinrectV nroatte90 buttonpinafrect">
+            <ul class="pinrectstyle">
+                <li class="pincell pinaf pinleftcell" :class="pintypeclass4af(item)" v-for="(item,index) in bottompins" :key="index">
+                    <div class="pinafname">
+                            <span>{{chipinfo.selectafs[item.id - 1].name}}
+                    </div>
+                    <ul class="pinrectstyle pinafdropdownlistH">
+                        <li class="pinafdropdownitem" v-for="(afitem,index1) in item.AFs" @click="afdropdownclick(item.id, afitem)">{{afitem.name}}</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
 
-            <!-- 右边pin脚 -->
-            <div class="pinrect pinrectV rightpinnumbrect">
-                <ul class="pinrectstyle"> 
-                    <li class="pinrightcell pinnumcell" v-for="(item,index) in rightpins" :key="index">{{item.id}}</li>
-                </ul>
-            </div>
-            
-            <div class="pinrect pinrectV rightnamerect">
-                <ul class="pinrectstyle"> 
-                    <li class="pincell pinname pinrightcell" :class="pintypeclass4name(item)" v-for="(item,index) in rightpins" :key="index">{{item.name}}</li>
-                </ul>
-            </div>
+        <!-- 右边pin脚 -->
+        <div class="pinrect pinrectV rightpinnumbrect">
+            <ul class="pinrectstyle">
+                <li class="pinrightcell pinnumcell" v-for="(item,index) in rightpins" :key="index">{{item.id}}</li>
+            </ul>
+        </div>
 
-            <div class="pinrect pinrectV rightpinafrect">
-                <ul class="pinrectstyle"> 
-                    <li class="pincell pinaf pinrightcell" :class="pintypeclass4af(item)" v-for="(item,index) in rightpins" :key="index">
-                        <div class="pinafname">
-                            <span>{{chipinfo.selectafs[item.id - 1].name}}</span>
-                        </div>
-                        <ul class="pinrectstyle pinafdropdownlistV">
-                            <li class="pinafdropdownitem pinleftcell" v-for="(afitem,index1) in item.AFs" @click="afdropdownclick(item.id, afitem)">{{afitem.name}}</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>  
+        <div class="pinrect pinrectV rightnamerect">
+            <ul class="pinrectstyle">
+                <li class="pincell pinname pinrightcell" :class="pintypeclass4name(item)" v-for="(item,index) in rightpins" :key="index">{{item.name}}</li>
+            </ul>
+        </div>
 
-            <!-- 上部pin脚 -->
-            <div v-if="chipinfo.package === 1" class="pinrect pinrectV nroatte90 toppinnumbrect ">
-                <ul class="pinrectstyle"> 
-                    <li class="pinrightcell pinnumcell" v-for="(item,index) in toppins" :key="index">{{item.id}}</li>
-                </ul>
-            </div>
+        <div class="pinrect pinrectV rightpinafrect">
+            <ul class="pinrectstyle">
+                <li class="pincell pinaf pinrightcell" :class="pintypeclass4af(item)" v-for="(item,index) in rightpins" :key="index">
+                    <div class="pinafname">
+                        <span>{{chipinfo.selectafs[item.id - 1].name}}</span>
+                    </div>
+                    <ul class="pinrectstyle pinafdropdownlistV">
+                        <li class="pinafdropdownitem pinleftcell" v-for="(afitem,index1) in item.AFs" @click="afdropdownclick(item.id, afitem)">{{afitem.name}}</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
 
-            <div v-if="chipinfo.package === 1" class="pinrect pinrectV nroatte90 topnamerect">
-                <ul class="pinrectstyle"> 
-                    <li class="pincell pinname pinrightcell" :class="pintypeclass4name(item)" v-for="(item,index) in toppins" :key="index">{{item.name}}&nbsp;</li>
-                </ul>
-            </div>
+        <!-- 上部pin脚 -->
+        <div v-if="chipinfo.package === 1" class="pinrect pinrectV nroatte90 toppinnumbrect ">
+            <ul class="pinrectstyle">
+                <li class="pinrightcell pinnumcell" v-for="(item,index) in toppins" :key="index">{{item.id}}</li>
+            </ul>
+        </div>
 
-            <div v-if="chipinfo.package === 1" class="pinrect pinrectV nroatte90 toppinafrect">
-                <ul class="pinrectstyle">                                                                                                       
-                    <li class="pincell pinaf pinrightcell" :class="pintypeclass4af(item)" v-for="(item,index) in toppins" :key="index">
-                        <div class="pinafname">
-                            <span>{{chipinfo.selectafs[item.id - 1].name}}</span>
-                        </div>
-                        <ul class="pinrectstyle pinafdropdownlistH">
-                            <li class="pinafdropdownitem pinleftcell" v-for="(afitem,index1) in item.AFs" @click="afdropdownclick(item.id, afitem)">{{'AF' + afitem.idx + '[' + afitem.name + ']'}}</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+        <div v-if="chipinfo.package === 1" class="pinrect pinrectV nroatte90 topnamerect">
+            <ul class="pinrectstyle">
+                <li class="pincell pinname pinrightcell" :class="pintypeclass4name(item)" v-for="(item,index) in toppins" :key="index">{{item.name}}&nbsp;</li>
+            </ul>
+        </div>
+
+        <div v-if="chipinfo.package === 1" class="pinrect pinrectV nroatte90 toppinafrect">
+            <ul class="pinrectstyle">
+                <li class="pincell pinaf pinrightcell" :class="pintypeclass4af(item)" v-for="(item,index) in toppins" :key="index">
+                    <div class="pinafname">
+                        <span>{{chipinfo.selectafs[item.id - 1].name}}</span>
+                    </div>
+                    <ul class="pinrectstyle pinafdropdownlistH">
+                        <li class="pinafdropdownitem pinleftcell" v-for="(afitem,index1) in item.AFs" @click="afdropdownclick(item.id, afitem)">{{'AF' + afitem.idx + '[' + afitem.name + ']'}}</li>
+                    </ul>
+                </li>
+            </ul>
         </div>
     </div>
+</div>
 </body>
 
 <script type="text/javascript">
@@ -503,6 +502,9 @@
             showchip: false,
             chiplookstyle:{
                 transform: '',
+            },
+            storagekeynames:{
+                afselectedkey: 'afselected',
             },
             chipinfo:{
                 name: 'MM32F0131C7P',
@@ -591,7 +593,7 @@
                     ,{id: 62, name:'PB9', type: 1, AFs:[{idx: 0, name:"UART1_TX"},{idx: 1, name:"I2C1_SDA"},{idx: 2, name:"TIM17_CH1"},{idx: 4, name:"CAN1_TX"},{idx: 5, name:"SPI2_NSS"},{idx: 6, name:"TIM3_CH3"}]}
                     ,{id: 63, name:'VSS', type: 3}
                     ,{id: 64, name:'VDD', type: 2}
-                ]         
+                ]
             },
             //type: 1-gpio 2-vdd 3-vss 4-vdda 5-vdds 6-nRst, 7-boot
             class4pintype: ['', 'gpio','vddpin','vsspin','vddapin','vssapin','nrstpin', 'bootpin'],
@@ -616,12 +618,12 @@
                     } else {
                         return this.maxsidepincount * this.sidecount
                     }
-                }                
+                }
             },
             visualsidepincount:{
                 get(){
                     return this.visualpincount / this.sidecount;
-                }                
+                }
             },
             widthrate:{
                 get(){
@@ -689,8 +691,8 @@
             leftpins:{
                 get(){
                     let pininfos = this.pins.slice(0, this.leftpinendindex);
-                    if ((this.chipinfo.pinassign != undefined && this.chipinfo.pinassign[0].aligment != undefined && this.chipinfo.pinassign[0].aligment === 1) 
-                    || (this.chipinfo.pinassign === undefined && this.pinaligment === 1)){
+                    if ((this.chipinfo.pinassign != undefined && this.chipinfo.pinassign[0].aligment != undefined && this.chipinfo.pinassign[0].aligment === 1)
+                        || (this.chipinfo.pinassign === undefined && this.pinaligment === 1)){
                         while (pininfos.length < this.visualsidepincount){
                             pininfos.unshift({})
                         }
@@ -713,8 +715,8 @@
                         pininfos = this.pins.slice(this.leftpinendindex, this.bottompinendindex);
                     }
 
-                    if ((this.chipinfo.pinassign != undefined && this.chipinfo.pinassign[1].aligment != undefined && this.chipinfo.pinassign[1].aligment === 1) 
-                    || (this.chipinfo.pinassign === undefined && this.pinaligment === 1)){
+                    if ((this.chipinfo.pinassign != undefined && this.chipinfo.pinassign[1].aligment != undefined && this.chipinfo.pinassign[1].aligment === 1)
+                        || (this.chipinfo.pinassign === undefined && this.pinaligment === 1)){
                         while (pininfos.length < this.visualsidepincount){
                             pininfos.unshift({})
                         }
@@ -745,11 +747,11 @@
                     }
                     else {
                         pininfos = this.pins.slice(this.bottompinendindex, this.rightpinendindex).reverse()
-                    } 
+                    }
 
-                    if ((this.sidecount === 4 && this.chipinfo.pinassign != undefined && this.chipinfo.pinassign[2].aligment != undefined && this.chipinfo.pinassign[2].aligment === 1) 
-                    || (this.sidecount === 2 && this.chipinfo.pinassign != undefined && this.chipinfo.pinassign[1].aligment != undefined && this.chipinfo.pinassign[1].aligment === 1) 
-                    || (this.chipinfo.pinassign === undefined && this.pinaligment === 1)){
+                    if ((this.sidecount === 4 && this.chipinfo.pinassign != undefined && this.chipinfo.pinassign[2].aligment != undefined && this.chipinfo.pinassign[2].aligment === 1)
+                        || (this.sidecount === 2 && this.chipinfo.pinassign != undefined && this.chipinfo.pinassign[1].aligment != undefined && this.chipinfo.pinassign[1].aligment === 1)
+                        || (this.chipinfo.pinassign === undefined && this.pinaligment === 1)){
                         while (pininfos.length < this.visualsidepincount){
                             pininfos.unshift({})
                         }
@@ -766,8 +768,8 @@
             toppins:{
                 get(){
                     let pininfos = this.pins.slice(this.rightpinendindex, this.toppinendindex).reverse();
-                    if ((this.sidecount === 4 && this.chipinfo.pinassign != undefined && this.chipinfo.pinassign[3].aligment != undefined && this.chipinfo.pinassign[3].aligment === 1) 
-                    || (this.chipinfo.pinassign === undefined && this.pinaligment === 1)){
+                    if ((this.sidecount === 4 && this.chipinfo.pinassign != undefined && this.chipinfo.pinassign[3].aligment != undefined && this.chipinfo.pinassign[3].aligment === 1)
+                        || (this.chipinfo.pinassign === undefined && this.pinaligment === 1)){
                         while (pininfos.length < this.visualsidepincount){
                             pininfos.unshift({})
                         }
@@ -796,12 +798,12 @@
         methods: {
             pintypeclass4name(item){
                 if (item.id === undefined){
-                    return 'unvisiable'; 
+                    return 'unvisiable';
                 }
 
                 if (item.type === 1){
                     return this.class4pintype[item.type] + item.name.substring(1, 2).toLowerCase();
-                } 
+                }
 
                 return this.class4pintype[item.type];
             },
@@ -856,6 +858,17 @@
             },
             afdropdownclick(id, item){
                 this.chipinfo.selectafs[id - 1].name = item.name;
+            },
+            savedata(){
+                let selects = []
+                for (var i = 0; i < this.chipinfo.selectafs.length; i ++){
+                    if ((this.chipinfo.selectafs[i].name != undefined) && (this.chipinfo.selectafs[i].name.length > 0)){
+                        selects.push({name: this.chipinfo.selectafs[i].name})
+                    }
+                }
+                localStorage.setItem(this.storagekeynames.afselectedkey, JSON.stringify(selects));
+                console.log(localStorage.getItem(this.storagekeynames.afselectedkey))
+                // let a = JSON.parse(localStorage.getItem(this.storagekeynames.afselectedkey));
             }
             // 此函数用来检测数据是否完整, AF里面多了一个”，“，导致我调试了一上午
             // getAFdata(item, items, itemname){
