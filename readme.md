@@ -290,8 +290,69 @@ computed:{
 2. 样例  
    参考part1.html   
 
+###第十三课 v-model
+1. input='text'时，v-model收集的是value里面的值
+2. input='radio'时，v-model收集的是value里面的值,并且要配置value属性值
+3. input='checkbox'时，如果没有配置value属性值，则收集checked属性的值(true/false)
+>如果绑定的初始值不是数组，则只会checked属性值(布尔值)  
+ 如果绑定的初始值是数组，那么收集value的属性值，构成一个数组
+4. 修饰符  
+4.1 lazy: 失去焦点时，才会去收集数据，不会发生改变就去收集  
+4.2 number:输入的字符串转变为数字  
+4.3 trim:去除输入数据的尾空格  
+
+###第十四课 
+1.介绍了一个日期的js库
+
+###第十五课 内置指令
+1. v-bind: 单向绑定解析表达式, 可以简写为:xxx
+2. v-model: 双向数据绑定
+3. v-for: 遍历数组、对象、字符串
+4. v-on: 绑定事件监听，可以简写为@
+5. v-if v-else v-show: 条件渲染, 区别v-show是渲染出来不显示，v-if/v-else是不渲染
+6. v-text: 向其所在的节点渲染文字内容, 与插值语法`{{值}}`的区别是 v-text会替换掉节点中的内容，而插值语法不会
+7. v-html: 向其所在的节点渲染包含html结构的内容
+8. v-cloak: 没有值，实质是一个特殊属性，vue实例在接管容器以后，会删除v-cloak，配合css使用，可以解决网速缓慢情况下，而vue还未接管容器时出现的页面渲染问题,例如使用插值语法的地方出现{{xxx}}  
+>个人感觉v-cloak没什么用，可以通过把<script type="text/javascript" src="../common/vue.js"></script>前置解决，唯一的缺点就是大白屏，没东西渲染出来  
+9. v-once: 所在节点只会被动态渲染一次以后，成为静态内容，以后的数据发生改变，也不会触发后续动态渲染。可能调优的时候会用到  
+10. v-pre: 所在节点不参加编译，直接原样输出
+
+###第十六课 自定义指令
+<h2>当前的n值为<span v-text="info.n"></span></h2> 
+```javascript
+directives:{
+    bign(element, binding){
+        element.innerText = binding.value * 10;
+    },
+}
+```
+<input v-bindf="info.n"/>
+```javascript
+directives:{
+    bindf:{
+        //当自定义指令与元素在内存中绑定时触发，只会一次
+        bind(element, binding){
+            console.log('bind', element, binding)
+            element.value = binding.value;
+        },
+        //当自定义指令所在的元素被插入到页面时触发，只会一次
+        inserted(element, binding){
+            console.log('inserted', element, binding)
+            element.focus()
+        },
+        //当自定义指令所在的模板被重新解析时触发，多次
+        update(element, binding){
+            console.log('update',element, binding)
+            element.value = binding.value;
+        }
+    }
+}
+```  
+>bindf的写法时标准写法，细粒度的控制了自定义事情绑定的全流程 bind->inserted->update
+>bign的写法，只是粗略的控制了自定义指令bind和update部分，忽略了inserted，如果在插入渲染的元素时有特殊需要，还是需要inserted里面做点事情
+
 ##个人心得  
-###vue
+###vue  
 ####函数是否被触发,取决于函数中的变量是否被修改  
 ####页面是否刷新，取决于虚拟DOM树是否被修改
 ##javacript
@@ -299,10 +360,12 @@ computed:{
 ####基本操作
 1. 尾部添加 push
 2. 尾部删除 pop
-####循环
-1. `arr.foreach(item=>{遍历时需要执行的语句})`
-####排序
-1. `array.sort((value1, value2)=>{  
+3. 删除第一个元素 shift
+4. 添加第一个元素 unshift
+5. 在指定位置替换一个元素 splice
+6. 数组反转 reverse
+7. 循环 `arr.foreach(item=>{遍历时需要执行的语句})`
+8. 排序 `array.sort((value1, value2)=>{  
       if (value1 > value2){
          return 1
       } else {
@@ -313,4 +376,14 @@ computed:{
          }
       } 
    })`
- 2.数组反转`arr.reverse()`
+###JSON
+####基本操作
+1. 对象转JSON`JSON.stringify(对象)`
+
+
+####参考资料
+#####网站
+1. bootcdn.cn  
+#####库
+1. monent.js
+2. day.js

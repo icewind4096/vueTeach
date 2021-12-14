@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="../common/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/dayjs/1.10.6/dayjs.min.js"></script>
+    <title>自定义指令</title>
+</head>
+<body>
+    <div id="root">
+        <div v-text="info.company"></div>    
+        <div v-html="info.companyhtml"></div>
+        <div>
+            <h2>当前的n值为<span v-text="info.n"></span></h2> 
+            <h3>放大10倍以后的n值为<span v-bign="info.n"></span></h3> 
+            <button @click="incn">INC N</button>
+            <input v-bindf="info.n"/>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript">
+    const vm = new Vue({
+        el: "#root",
+        data: function(){
+            return {
+                info: {
+                    company: 'mindmotion',
+                    companyhtml: '<h3>mindmotion</h3>',
+                    n: 1,
+                }                    
+            }
+        },
+        computed: {
+        },
+        methods: {
+            incn(){
+                console.log(this.info.n)
+                this.info.n = this.info.n + 1;
+            }
+        },
+        directives:{
+            bign(element, binding){
+                element.innerText = binding.value * 10;
+            },
+            bindf:{
+                //当自定义指令与元素在内存中绑定时触发，只会一次
+                bind(element, binding){
+                    console.log('bind', element, binding)
+                    element.value = binding.value;
+                },
+                //当自定义指令所在的元素被插入到页面时触发，只会一次
+                inserted(element, binding){
+                    console.log('inserted', element, binding)
+                    element.focus()
+                },
+                //当自定义指令所在的模板被重新解析时触发，多次
+                update(element, binding){
+                    console.log('update',element, binding)
+                    element.value = binding.value;
+                }
+            }
+        }
+    })
+</script>
+
+</html>

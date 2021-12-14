@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据绑定V-Model</title>
+    <script type="text/javascript" src="../common/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <form>
+            账号:<input type="text" v-model="account"><br/>
+            密码:<input type="password" v-model="password"><br/>
+            年龄:<input type="text" v-model.number="age"><br/>
+            性别:<input type="radio" v-model="sex" value="f">男<input type="radio" v-model="sex" value="m">女<br>
+            爱好:<input type="checkbox" value="study" v-model="hobby">学习<input type="checkbox" value="playgame"  v-model="hobby">游戏<input type="checkbox" value="eat"  v-model="hobby">吃饭<br/>
+            地区:
+            <select v-model="city">
+                <option>北京</option>
+                <option>南京</option>
+                <option>西安</option>
+            </select><br/>
+            其他信息<textarea v-model="other"></textarea><br/>
+            阅读并接受协议:<input type="checkbox" v-model="aggren"><a href="#">用户协议</a><br/>
+            <button @click.prevent="mysubmit">提交</button>
+        </form>    
+    </div>
+    <script>
+        const vm = new Vue({
+            el:'#app',
+            data:{
+                account: '',
+                age: 18,
+                password: '',
+                sex: 'm',
+                hobby:[],
+                city:'南京',
+                other: '',
+                aggren: false,
+            },
+            methods: {
+                mysubmit(){
+                    console.log(JSON.stringify(this._data));
+                    alert('阻止提交');
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="../common/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/dayjs/1.10.6/dayjs.min.js"></script>
+    <title>内置指令</title>
+</head>
+<body>
+    <div id="root">
+        <div v-text="info.company">
+
+        </div>    
+        <div v-html="info.companyhtml"></div>
+    </div>
+</body>
+
+<script type="text/javascript">
+    const vm = new Vue({
+        el: "#root",
+        data: function(){
+            return {
+                info: {
+                    company: 'mindmotion',
+                    companyhtml: '<h3>mindmotion</h3>',
+                }                    
+            }
+        },
+        computed: {
+        },
+        methods: {
+        },
+    })
+</script>
+
+</html>
