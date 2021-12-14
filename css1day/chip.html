@@ -434,7 +434,7 @@
                             <span>{{afname(item)}}</span>
                         </div>
                         <ul class="pinrectstyle pinafdropdownlistV">
-                            <li class="pinafdropdownitem" v-for="(afitem,index1) in item.AFs" @click="afdropdownclick(item.id, afitem)">{{'AF' + afitem.idx + '[' + afitem.name + ']'}}</li>
+                            <li class="pinafdropdownitem" v-for="(afitem,index1) in item.AFs" @click="afdropdownclick(item.id, afitem)">{{afdisplay(afitem)}}</li>
                         </ul>
                     </li>
                 </ul>
@@ -460,7 +460,7 @@
                             <span>{{afname(item)}}</span>
                         </div>
                         <ul class="pinrectstyle pinafdropdownlistH">
-                            <li class="pinafdropdownitem" v-for="(afitem,index1) in item.AFs" @click="afdropdownclick(item.id, afitem)">{{afitem.name}}</li>
+                            <li class="pinafdropdownitem" v-for="(afitem,index1) in item.AFs" @click="afdropdownclick(item.id, afitem)">{{afdisplay(afitem)}}</li>
                         </ul>
                     </li>
                 </ul>
@@ -486,7 +486,7 @@
                             <span>{{afname(item)}}</span>
                         </div>
                         <ul class="pinrectstyle pinafdropdownlistV">
-                            <li class="pinafdropdownitem pinleftcell" v-for="(afitem,index1) in item.AFs" @click="afdropdownclick(item.id, afitem)">{{afitem.name}}</li>
+                            <li class="pinafdropdownitem pinleftcell" v-for="(afitem,index1) in item.AFs" @click="afdropdownclick(item.id, afitem)">{{afdisplay(afitem)}}</li>
                         </ul>
                     </li>
                 </ul>
@@ -512,7 +512,7 @@
                             <span>{{afname(item)}}</span>
                         </div>
                         <ul class="pinrectstyle pinafdropdownlistH">
-                            <li class="pinafdropdownitem pinleftcell" v-for="(afitem,index1) in item.AFs" @click="afdropdownclick(item.id, afitem)">{{'AF' + afitem.idx + '[' + afitem.name + ']'}}</li>
+                            <li class="pinafdropdownitem pinleftcell" v-for="(afitem,index1) in item.AFs" @click="afdropdownclick(item.id, afitem)">{{afdisplay(afitem)}}</li>
                         </ul>
                     </li>
                 </ul>
@@ -764,6 +764,7 @@
                     let pininfos = this.adjustpininfosH(this.pins.slice(0, this.leftpinendidx)
                                                       ,this.maxsidepincount
                                                       ,this.leftpinaligment);
+                    this.fillEmptyInAFs(pininfos);
                     return pininfos;
                 }
             },
@@ -782,6 +783,7 @@
                     let pininfos = this.adjustpininfosH(this.pins.slice(this.leftpinendidx, this.buttompinendidx)
                                                       ,this.maxsidepincount
                                                       ,this.bottompinaligment);
+                    this.fillEmptyInAFs(pininfos);
                     return pininfos;
                 }
             },
@@ -800,6 +802,7 @@
                     let pininfos = this.adjustpininfosV(this.pins.slice(this.buttompinendidx, this.rightpinendidx)
                                                         ,this.maxsidepincount
                                                         ,this.rightpinaligment);
+                    this.fillEmptyInAFs(pininfos);
                     return pininfos;
                 }
             },
@@ -818,6 +821,7 @@
                     let pininfos = this.adjustpininfosV(this.pins.slice(this.rightpinendidx, this.toppinendidx)
                                                         ,this.maxsidepincount
                                                         ,this.toppinaligment);
+                    this.fillEmptyInAFs(pininfos);
                     return pininfos;
                 }
             },
@@ -828,6 +832,16 @@
                             return this.chipinfo.data.afs[item.id - 1].name;
                         }
                         return '';
+                    }
+                }
+            },
+            afdisplay:{
+                get(){
+                    return function(item){
+                        if (item.idx === -1)
+                            return '　'
+                        else 
+                            return 'AF' + item.idx + '[' + item.name + ']';
                     }
                 }
             }
@@ -844,6 +858,13 @@
             }
         },
         methods: {
+            fillEmptyInAFs(pininfos){
+                pininfos.forEach(element => {
+                    if (element.AFs != undefined){
+                        element.AFs.unshift({idx: -1, name:'　'})
+                    } 
+                });
+            },                                                    
             adjustpininfos(pinarray, sidecount, aligment){
                 var arr = pinarray;
                 for (let i = arr.length; i < sidecount; i ++){
@@ -884,13 +905,17 @@
                 return 'pinafnamenoemptycolor'
             },
             afdropdownclick(id, item){
-                this.chipinfo.data.afs[id - 1].name = item.name;
+                if (item.name === '　'){
+                    this.chipinfo.data.afs[id - 1].name = ''
+                } else {
+                    this.chipinfo.data.afs[id - 1].name = item.name;
+                }
             },
             loaddata(){
                 const afs = JSON.parse(localStorage.getItem(this.chipinfo.config.keys.storageafs));
                 if (afs != undefined && afs.length > 0){
                     for (let i = 0; i < afs.length; i++){
-                        this.chipinfo.data.afs[afs[i].id].name = afs[0].name;
+                        this.chipinfo.data.afs[afs[i].id].name = afs[i].name;
                     }
                 }
             },
